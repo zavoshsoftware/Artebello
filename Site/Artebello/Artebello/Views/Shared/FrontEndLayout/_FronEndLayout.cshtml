@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+	<title>@ViewBag.Title  Artebello</title>
+	<meta charset="utf-8">
+	<!--[if IE]>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<![endif]-->
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/ico" href="~/images/favicon.png" />
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="stylesheet" href="/Content/FrontEnd/bootstrap.min.css">
+	<link rel="stylesheet" href="/Content/FrontEnd/main.css" id="color-switcher-link">
+	<link rel="stylesheet" href="/Content/FrontEnd/animations.css">
+	<link rel="stylesheet" href="/Content/FrontEnd/fonts.css">
+	<script src="/Scripts/FrontEnd/vendor/modernizr-2.6.2.min.js"></script>
+	<!--[if lt IE 9]>
+		<script src="js/vendor/html5shiv.min.js"></script>
+		<script src="js/vendor/respond.min.js"></script>
+		<script src="js/vendor/jquery-1.12.4.min.js"></script>
+	<![endif]-->
+	<link href="~/Content/FrontEnd/style-rtl.css" rel="stylesheet" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-176718580-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-176718580-1');
+    </script>
+    <script type="text/javascript">!function () { function t() { var t = document.createElement("script"); t.type = "text/javascript", t.async = !0, localStorage.getItem("rayToken") ? t.src = "https://app.raychat.io/scripts/js/" + o + "?rid=" + localStorage.getItem("rayToken") + "&href=" + window.location.href : t.src = "https://app.raychat.io/scripts/js/" + o; var e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(t, e) } var e = document, a = window, o = "13b2a125-ae80-45a5-85f0-5e2d50bb1288"; "complete" == e.readyState ? t() : a.attachEvent ? a.attachEvent("onload", t) : a.addEventListener("load", t, !1) }();</script>
+</head>
+<body>
+	<!--[if lt IE 9]>
+		<div class="bg-danger text-center">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" class="highlight">upgrade your browser</a> to improve your experience.</div>
+	<![endif]-->
+	<div class="preloader">
+		<div class="preloader_image"></div>
+	</div>
+
+	<!-- search modal -->
+	<div class="modal" tabindex="-1" role="dialog" aria-labelledby="search_modal" id="search_modal">
+		<div class="widget widget_search">
+			<form method="get" class="searchform form-inline" action="/">
+				<div class="form-group">
+					<input type="text" value="" name="search" class="form-control" placeholder="Search keyword" id="modal-search-input">
+				</div>
+				<button type="submit" class="theme_button">Search</button>
+			</form>
+		</div>
+	</div>
+
+	<div id="canvas">
+		<div id="box_wrapper">
+
+			@Html.Partial("FrontEndLayout/_MenuPartial")
+			@RenderBody()
+			@Html.Partial("FrontEndLayout/_FooterPartial")
+
+
+
+		</div>
+	</div>
+	<script src="/Scripts/FrontEnd/compressed.js"></script>
+	<script src="/Scripts/FrontEnd/main.js"></script>
+    <script src="~/Scripts/FrontEnd/custom.js"></script>
+    @RenderSection("scripts", required: false)
+    <script>
+        function ChangeLocation(location) {
+            window.location.href = location;
+        }
+    </script>
+</body>
+</html>

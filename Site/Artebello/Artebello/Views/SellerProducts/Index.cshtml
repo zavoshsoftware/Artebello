@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Models.Product>
+
+@{
+    Layout = "~/Views/Shared/SellerLayout/_BackEndLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+            @(Html.Kendo().Grid(Model)
+                  .Name("Grid")
+                  .Columns(columns =>
+                      {
+                                                          
+            columns.Bound(model => model.Code);
+            columns.Bound(model => model.Title);
+            columns.Bound(model => model.Amount);
+    		columns.Bound(model => model.ImageUrl).Template(@<text><img src="@item.ImageUrl" height="100px" /></text>);
+                        columns.Bound(model => model.Quantity);
+                        columns.Bound(model => model.CreateYear);
+                        columns.Bound(model => model.DiscountAmount);
+                        columns.Bound(model => model.IsInPromotion);
+                      //columns.Bound(model => model.IsInHome);
+                      //columns.Bound(model => model.IsActive);
+                      columns.Bound(model => model.CreationDate);
+                        columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false)
+                                .Template(@<text>
+    									@Html.ActionLink("ویرایش", "Edit", new {id = @item.Id}, new {@class = "k-button"})
+    									@Html.ActionLink("حذف", "Delete", new {id = @item.Id}, new {@class = "k-button"})
+    									</text>).Width(200);
+                      })
+            .ToolBar(toolbar =>
+            {
+                toolbar.Custom().Action("Create", "SellerProducts").Text("افزودن");
+            }
+            )
+            .DataSource(dataSource => dataSource
+                                        .Server()
+
+                                        .Model(model => model.Id(item => item.Id))
+                        )
+        )
+</body>
+</html>

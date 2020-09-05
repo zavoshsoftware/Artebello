@@ -1,0 +1,155 @@
+﻿@model ViewModels._BaseViewModel
+
+<header class="page_header transparent_header doted_items section_padding_10 columns_padding_0 table_section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-sm-5 col-xs-6 logo-img">
+                <a href="./" class="logo logo_image">
+                    <img src="/images/logo.png" alt="">
+                </a>
+                <span class="toggle_menu visible-xs">
+                    <span></span>
+                </span>
+            </div>
+            <div class="col-lg-3 col-md-3 hidden-sm hidden-xs"></div>
+            <div class="col-lg-6 col-md-6 col-sm-2 col-xs-6 text-right">
+                <!-- main nav start -->
+                <nav class="mainmenu_wrapper">
+                    <ul class="mainmenu nav sf-menu">
+
+
+                        <!-- eof pages -->
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li>
+                                <a href="/userlogin">ورود/ثبت نام</a>
+
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="#">ناحیه کاربری</a>
+                                <ul>
+                                    @{
+                                        var identity = (System.Security.Claims.ClaimsIdentity)User.Identity;
+                                        string roleName = identity.FindFirst(System.Security.Claims.ClaimTypes.Role).Value;
+                                        if (roleName == "seller")
+                                        {
+                                            <li>
+                                                <a href="/SellerProducts/Index">ورود به پنل فروشندگان</a>
+                                            </li>
+                                        }
+                                        else if (roleName == "customer")
+                                        {
+                                            <li>
+                                                <a href="/account/ChangeToSeller">تغییر حساب کاربری به فروشنده</a>
+                                            </li>
+                                        }
+                                        else if (roleName == "administrator")
+                                        {
+                                            <li>
+                                                <a href="/sellers">ورود به پنل مدیریت</a>
+                                            </li>
+                                        }
+                                    }
+                                    <li>
+                                        <a href="/orders/list">لیست سفارشات</a>
+                                    </li>
+                                    <li>
+                                        <a href="/basket">سبد خرید</a>
+                                    </li>
+                                    <li>
+                                        <a href="/account/LogOff">خروج</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        }
+                        <li>
+                            <a href="/about">درباره ما</a>
+
+                        </li>
+                        <li>
+                            <a href="/artists">هنرمندان</a>
+
+                        </li>
+                        <li>
+                            <a href="/blog">وبلاگ</a>
+
+                        </li>
+                        <li>
+                            <a href="#">آثار هنری</a>
+                            <div class="mega-menu">
+                                <ul class="mega-menu-row">
+                                    @for (int i = 0; i < 2; i++)
+                                    {
+                                        <li class="mega-menu-col">
+                                            <ul>
+                                                @foreach (var productGroup in Model.MenuProductGroups.Skip(i * 4).Take(4))
+                                                {
+                                                    <li>
+                                                        <a href="/category/@productGroup.ProductGroup.UrlParam">@productGroup.ProductGroup.Title</a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </li>
+                                    }
+                                    <li class="mega-menu-col mega-menu-image" style="background-image:url(@Model.MegaMenuImage.ImageUrl);" onclick="ChangeLocation('@Model.MegaMenuImage.Title');">
+                                    </li>
+                                    <li class="mega-menu-col mega-menu-image" style="background-image:url(@Model.MegaMenuImage2.ImageUrl);" onclick="ChangeLocation('@Model.MegaMenuImage2.Title');">
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <!-- eof mega menu -->
+                        </li>
+                        @*<li>
+                                <a href="#">آثار هنری</a>
+                                <ul>
+                                    @foreach (var productGroup in Model.MenuProductGroups)
+                                    {
+                                        <li>
+                                            <a href="/category/@productGroup.ProductGroup.UrlParam">@productGroup.ProductGroup.Title</a>
+                                            @if (productGroup.Products.Count() > 0)
+                                                {
+                                                    <ul>
+                                                        @foreach (var product in productGroup.Products)
+                                                        {
+                                                            <li>
+                                                                <a href="/product/@product.Code">@product.Title</a>
+                                                            </li>
+                                                        }
+
+                                                    </ul>
+                                                }
+                                        </li>
+                                    }
+                                </ul>
+                            </li>*@
+                        @*<li>
+                                <a href="#">آثار هنری</a>
+                                <ul>
+                                    @foreach (var productGroup in Model.MenuProductGroups)
+                                    {
+                                            <li>
+                                                <a href="/category/@productGroup.UrlParam">@productGroup.Title</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>*@
+                        <li class="active">
+                            <a href="/">خانه</a>
+                        </li>
+
+                    </ul>
+                </nav>
+                <!-- eof main nav -->
+                <span class="toggle_menu hidden-xs">
+                    <span></span>
+                </span>
+            </div>
+
+        </div>
+    </div>
+</header>

@@ -1,0 +1,8 @@
+Before opening the presentation, 
+MAKE SURE you have installed the following fonts:
+
+Open-Sans
+http://www.google.com/fonts/#UsePlace:use/Collection:Open+Sans
+
+LATO
+http://www.fontsquirrel.com/fonts/LATO

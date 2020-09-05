@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "ورود | ";
+    Layout = "~/Views/Shared/FrontEndLayout/_FronEndLayout.cshtml";
+}
+<section class="page_breadcrumbs ls ms theme_breadcrumbs parallax section_padding_bottom_15 section_padding_top_75">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="heading text-center bottom_border">
+                    <p class="text-uppercase josefin grey fontsize_20">ورود</p>
+                    <h1 class="section_header topmargin_5">ورود</h1>
+                </div>
+                <ol class="breadcrumb dirrtl">
+                    <li>
+                        <a href="./">
+                            خانه
+                        </a>
+                    </li>
+                    <li class="active">
+                        ورود
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ls section_padding_110">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 to_animate login-main" data-animation="scaleAppear">
+                <div class="contact-form row columns_margin_0 login-form">
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

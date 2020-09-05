@@ -1,0 +1,337 @@
+﻿@model ViewModels.ProductDetailViewModel
+
+@{
+    Layout = "~/Views/Shared/FrontEndLayout/_FronEndLayout.cshtml";
+    ViewBag.Title = Model.Product.Title + " | ";
+}
+
+<section class="page_breadcrumbs ls ms parallax section_padding_bottom_15 section_padding_top_75" style="background-image: url('@Model.Product.HeaderUrl') !important;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="heading text-center bottom_border">
+                    <p class="text-uppercase josefin grey fontsize_20">محصولات</p>
+                    <h1 class="section_header topmargin_5">@Model.Product.Title</h1>
+                </div>
+                <ol class="breadcrumb dirrtl">
+                    <li>
+                        <a href="./">
+                            خانه
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/category">محصولات</a>
+                    </li>
+                    <li>
+                        <a href="/category/@Model.ProductGroup.UrlParam">@Model.ProductGroup.Title</a>
+                    </li>
+                    <li class="active">@Model.Product.Title</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ls section_padding_top_100 section_padding_bottom_75">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+
+                <div itemscope="" itemtype="http://schema.org/Product" class="product type-product row">
+                    <div class="images col-sm-6">
+                        <a href="images/shop/01.jpg" itemprop="image" class="main-image zoom" title="" data-gal="prettyPhoto[product-gallery]">
+                            @*<span class="onsale">حراج</span>
+                            <span class="newproduct">جدید</span>*@
+                            <img src="@Model.Product.ImageUrl" class="attachment-shop_single wp-post-image" alt="" title="">
+                        </a>
+                        <div id="product-thumbnails" class="owl-carousel thumbnails product-thumbnails" data-loop="true" data-center="true" data-margin="10" data-nav="false" data-dots="true" data-items="3" data-responsive-lg="3" data-responsive-md="3" data-responsive-sm="2"
+                             data-responsive-xs="2">
+
+                            @foreach (var image in Model.ProductImages)
+                            {
+                                <a href="@image.ImageUrl" class="zoom first" title="" data-gal="prettyPhoto[product-gallery]">
+                                    <img src="@image.ImageUrl" class="attachment-shop_thumbnail" alt="@image.Title">
+                                </a>
+                            }
+                        </div>
+
+                    </div>
+                    <!-- eof .images -->
+                    <div class="summary entry-summary col-sm-6">
+                        <h1 itemprop="name" class="product_title entry-title">@Model.Product.Title</h1>
+                        <div class="product-rating" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+                            <div class="star-rating" title="Rated 4.50 out of 5">
+                                <span style="width:90%">
+                                    <strong class="rating">4.50</strong> out of 5
+                                </span>
+                            </div>
+                            <span class="review-links pull-right darklinks">
+                                <a href="#comments" class="review-link" rel="nofollow">
+                                    <span itemprop="reviewCount" class="count">3</span> نظر
+                                </a>
+                                <span class="grey"> | </span>
+                                <a href="#respond" class="review-link" rel="nofollow">
+                                    نظر شما
+                                </a>
+                            </span>
+                        </div>
+                        <div class="product_meta">
+                            <span class="posted_in">
+                                <span class="grey">دسته بندی ها:</span>
+                                <span class="categories-links">
+                                    <a rel="category" href="/category/@Model.ProductGroup.UrlParam" class="theme_button small_button color1">@Model.ProductGroup.Title</a>
+                                </span>
+                            </span>
+                        </div>
+                        <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                            <div itemprop="description" class="product-desc">
+                                <p>@Html.Raw(Model.Product.Summery)</p>
+                            </div>
+                            <ul class="list1 no-bullets">
+                                <li>
+                                    <p class="price">
+                                        @if (Model.Product.IsInPromotion)
+                                        {
+                                            <del>
+                                                <span class="amount">@string.Format("{0:n0}", Model.Product.AmountStr)</span>
+                                            </del>
+                                        }
+                                        <ins>
+                                            <span class="amount">@string.Format("{0:n0}", Model.Product.DiscountAmountStr) تومان</span> 
+                                        </ins>
+                                    </p>
+                                
+                                 
+
+                                </li>
+                            </ul>
+                            <form class="cart" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="product_size" class="grey">ابعاد</label>
+                                    <span>: @Model.Product.Dimensions </span>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="product_size" class="grey">وزن</label>
+                                    <span>: @Model.Product.Weight </span>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="product_size" class="grey">متریال</label>
+                                    <span>: @Model.Product.Material </span>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">رنگ</label>
+                                    <span>: @Model.Product.ProductColor.Title </span>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">شاخه هنری</label>
+                                    <span>: @Model.Product.ProductMedium.Title </span>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">Orientation</label>
+                                    <span>: @Model.Product.ProductOrientation.Title </span>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">موضوع</label>
+                                    <span>: @Model.Product.ProductTheme.Title </span>
+
+                                </div>
+                                <button class="theme_button color1" type="button"  onclick="addToBasket(@Model.Product.Code,1);">افزودن به سبد خرید</button>
+
+                            </form>
+                        </div>
+
+                    </div>
+                    <!-- .summary.col- -->
+                </div>
+                <!-- .product.row -->
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+
+                    <li>
+                        <a href="#additional_tab" role="tab" data-toggle="tab">توضیحات تکمیلی</a>
+                    </li>
+                    <li>
+                        <a href="#reviews_tab" role="tab" data-toggle="tab">نظرات</a>
+                    </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content top-color-border bottommargin_30">
+
+                    <div class="tab-pane fade text-justify" id="additional_tab">
+                        <p>@Html.Raw(Model.Product.Body)</p>
+                    </div>
+                    <div class="tab-pane fade" id="reviews_tab">
+                        <div class="comments-area" id="comments">
+                            <h2 class="text-uppercase">نظر شما</h2>
+                            <ol class="comment-list">
+                                @foreach (var comment in Model.Comments)
+                                {
+                                    <li class="comment even thread-even depth-1 parent">
+                                        <article class="comment-body media">
+                                            <div class="media-right">
+                                                <img class="media-object" alt="" src="/images/avatar_default.jpg">
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="comment-meta darklinks">
+                                                    <a class="author_url" rel="external nofollow" href="#">@comment.Name</a>
+                                                </div>
+                                               
+                                                <p>@Html.Raw(comment.Message)</p>
+                                                <span class="comment-date">
+                                                    <span class="entry-date">@comment.CreationDate.ToShortDateString()</span>
+                                                </span>
+                                            </div>
+                                        </article>
+                                        <!-- .comment-body -->
+                                        @if (!string.IsNullOrEmpty(comment.Response)) { 
+                                        <ol class="children">
+                                            <li class="comment byuser odd alt depth-2 parent">
+                                                <article class="comment-body media">
+                                                    <div class="media-right">
+                                                        <img class="media-object" alt="" src="/images/avatar_default.jpg">
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="comment-meta darklinks">
+                                                            <a class="author_url" rel="external nofollow" href="#">ادمین</a>
+                                                        </div>
+                                                        <p>
+                                                            @Html.Raw(comment.Response)
+                                                        </p>
+                                                        
+                                                    </div>
+                                                </article>
+                                                <!-- .comment-body -->
+                                            </li>
+                                            <!-- #comment-## -->
+                                        </ol>
+                                        }
+                                        <!-- .children -->
+                                    </li>
+                                }
+
+                                <!-- #comment-## -->
+                            </ol>
+                            <!-- .comment-list -->
+                        </div>
+                        <!-- #comments -->
+                        <div class="comment-respond" id="respond">
+                            <h3>نظرات خود را با ما در میان بگذارید</h3>
+                            <div>
+                                <p class="alert alert-success" id="comment-succes">نظر شما با موفقیت ثبت شد</p>
+                                <p class="alert alert-danger" id="comment-reject"></p>
+
+                            </div>
+                            <div class="comment-form" id="commentform" >
+                                <div class="row columns_padding_5">
+
+                                    <div class="col-md-6">
+                                        <p class="comment-form-email">
+                                            <label for="comment_email">
+                                                ایمیل
+                                                <span class="required">*</span>
+                                            </label>
+                                            <!-- <i class="rt-icon2-mail2"></i> -->
+                                            <input type="email" aria-required="true" size="30" value="" name="commentEmail" id="commentEmail" class="form-control" placeholder="ایمیل">
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="comment-form-author">
+                                            <label for="author">
+                                                نام
+                                                <span class="required">*</span>
+                                            </label>
+                                            <!-- <i class="rt-icon2-user-outline"></i> -->
+                                            <input type="text" aria-required="true" size="30" value="" name="author" id="commentName" class="form-control" placeholder="نام و نام خانوادگی">
+                                        </p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p class="comment-form-chat">
+                                            <label for="comment">پیغام</label>
+                                            <!-- <i class="rt-icon2-pencil3"></i> -->
+                                            <textarea aria-required="true" rows="8" cols="45" name="comment" id="commentBody" class="form-control" placeholder="پیغام"></textarea>
+                                        </p>
+                                    </div>
+                                </div>
+                                <p class="form-submit topmargin_40">
+                                    <button class="theme_button wide_button color1" type="submit" id="prodcutReplySubmit" onclick="SubmitComment();">ارسال</button>
+
+                                    @*<button type="submit" id="submit" name="submit" class="theme_button wide_button color1" onclick="SubmitComment();">ثبت</button>*@
+                                </p>
+                            </div>
+                        </div>
+                        <!-- #respond -->
+                    </div>
+
+                </div>
+                <!-- eof .tab-content -->
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="relatedProducts">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <h2 class="text-right">محصولات مرتبط</h2>
+               @foreach (var item in Model.RelatedProducts)
+               {
+                   <div class="col-md-4">
+                       <a href="/product/@item.Code">
+                           <img src="@item.ImageUrl" alt="@item.Title" width="400"/>
+                       </a>
+                       <p class="item-title"><a href="/product/@item.Code">@item.Title</a></p>
+                   </div>
+               }
+                </div>
+            </div>
+        </div>
+</section>
+<script>
+    function SubmitComment() {
+       
+        var nameVal = $("#commentName").val();
+        var emailVal = $("#commentEmail").val();
+        var bodyVal = $("#commentBody").val();
+
+        if (nameVal !== "" && emailVal !== "" && bodyVal !== "") {
+                $.ajax(
+                {
+                url: "/Products/PostSubmitComment",
+                data: { name: nameVal, email: emailVal, body: bodyVal, id: '@Model.Product.Code' },
+                type: "POST"
+
+                }).done(function (result) {
+                    if (result === "true") {
+                        $("#comment-reject").css('display', 'none');
+                        $("#comment-succes").css('display', 'block');
+                        localStorage.setItem("id", "");
+                    }
+                    else if (result === "InvalidEmail") {
+                        $("#comment-reject").html('ایمیل وارد شده صحیح نمی باشد.');
+                        $("#comment-reject").css('display', 'block');
+                        $("#comment-succes").css('display', 'none');
+                    }
+                    else if (result === "false") {
+                        $("#comment-reject").html('خطایی رخ داده است. لطفا مجددا وارد صفحه شوید و تلاش کنید.');
+                        $("#comment-reject").css('display', 'block');
+                        $("#comment-succes").css('display', 'none');
+                    }
+                    });
+        }
+        else {
+            $("#comment-reject").html('تمامی فیلد های زیر را تکمیل نمایید.');
+            $("#comment-reject").css('display', 'block');
+            $("#comment-succes").css('display', 'none');
+
+        }
+
+    }
+</script>

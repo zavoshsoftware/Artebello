@@ -1,0 +1,242 @@
+﻿@model Models.Product
+
+@{
+    Layout = "~/Views/Shared/SellerLayout/_BackEndLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Product</h4>
+    	<hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductColor.Title)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ProductColor.Title)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductGroup.Title)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ProductGroup.Title)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductMedium.Title)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ProductMedium.Title)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductOrientation.Title)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ProductOrientation.Title)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductTheme.Title)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ProductTheme.Title)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductType.Title)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ProductType.Title)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Seller.Title)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Seller.Title)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Code)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Code)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Amount)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Amount)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Body)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Body)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ImageUrl)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Width)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Width)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Height)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Height)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Size)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Size)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Quantity)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateYear)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CreateYear)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DiscountAmount)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DiscountAmount)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.IsInPromotion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.IsInPromotion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.IsInHome)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.IsInHome)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Summery)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Summery)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.IsActive)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CreationDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CreationDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.LastModifiedDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.LastModifiedDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.IsDeleted)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.IsDeleted)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DeletionDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DeletionDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

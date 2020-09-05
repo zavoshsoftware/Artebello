@@ -1,0 +1,101 @@
+﻿@model ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "ورود";
+    Layout = "~/Views/Shared/FrontEndLayout/_FronEndLayout.cshtml";
+}
+
+<section class="page_breadcrumbs ls ms section_padding_bottom_15 section_padding_top_75" style="background-image: url('@ViewBag.HeaderImage');">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="heading text-center bottom_border">
+                    <p class="text-uppercase josefin grey fontsize_20">ورود</p>
+                    <h1 class="section_header topmargin_5">ورود</h1>
+                </div>
+                <ol class="breadcrumb dirrtl">
+                    <li>
+                        <a href="./">
+                            خانه
+                        </a>
+                    </li>
+                    <li class="active">
+                        ورود
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ls section_padding_110">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 to_animate login-main" data-animation="scaleAppear">
+                
+                <div class="login-form" id="login-form">
+                    <p>
+                        جهت دسترسی به اطلاعات حساب کاربری خود وارد شوید.
+                    </p>
+                    <div class="alert alert-info" id="error-box-login"></div>
+                    <div class="form-group">
+                    
+                        <div>
+
+
+                            <input type="text"
+                                   class="form-control" id="txtCellNum" name="txtCellNum" placeholder="شماره موبایل">
+                        </div>
+                    </div>
+
+
+                    <button type="button" id="btn-login" onclick="loginUser();" class="theme_button margin_0 animated fadeInRight">ورود</button>
+                </div>
+                <div class="login-form" id="register-form">
+                    <div class="alert alert-info" id="error-box-register"></div>
+                    <div class="alert alert-info mp5">اطلاعات شما تا کنون در وب سایت ثبت نشده است. برای ثبت نام، نام و نام خانوادگی خود را وارد نمایید.</div>
+                    <div class="alert alert-info" id="error-box-login"></div>
+                    <div class="form-group">
+                        <label for="otpFullName">نام و نام خانوادگی</label>
+
+                        <div>
+                            <input type="text" class="form-control" id="otpFullName" name="otpFullName" placeholder="نام و نام خانوادگی" onfocus="this.removeAttribute('readonly');">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                       
+                        <input type="checkbox" id="isSeller" name="isSeller">
+                        <label for="isSeller"> فروشنده هستم</label>
+                    </div>
+                    <button type="button" id="btn-register" onclick="CompleteRegisterFrom();" class="theme_button margin_0 animated fadeInRight">ثبت نام</button>
+                    <div id="register-loading-box" class="loading-sec">
+                        <img src="~/images/loading-payment.gif" />
+                    </div>
+                </div>
+                <div class="login-form" id="otp-form">
+
+                    <div class="alert alert-info" id="error-box-otp"></div>
+                    <div class="form-group">
+                        <label for="txtCode">کد فعال سازی</label>
+
+                        <div>
+
+                            <input type="password" class="form-control" id="txtCode" name="txtCode" placeholder="کد فعال سازی">
+                        </div>
+                    </div>
+
+
+                    <button type="button" id="btn-checkOtp" onclick="checkUserOtp();" class="theme_button margin_0 animated fadeInRight">تایید شماره موبایل</button>
+                    <div id="activation-loading-box" class="loading-sec">
+                        <img src="~/images/loading-payment.gif" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+      
+    </div>
+
+</section>
+@section scripts{
+<script src="~/Scripts/FrontEnd/custom-login.js"></script>
+    }

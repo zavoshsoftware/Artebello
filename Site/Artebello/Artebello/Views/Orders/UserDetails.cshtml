@@ -1,0 +1,95 @@
+﻿@model ViewModels.OrderDetailsViewModel
+
+@{
+    ViewBag.Title = "سفارش "+ Model.Order.Code +" | ";
+    Layout = "~/Views/Shared/FrontEndLayout/_FronEndLayout.cshtml";
+}
+
+<section class="page_breadcrumbs ls ms theme_breadcrumbs parallax section_padding_bottom_15 section_padding_top_75">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="heading text-center bottom_border">
+                    <p class="text-uppercase josefin grey fontsize_20">جزئیات سفارش</p>
+                    <h1 class="section_header topmargin_5">کد سفارش @Model.Order.Code</h1>
+                </div>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="./">
+                            خانه
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/orders/list">لیست سفارشات</a>
+                    </li>
+                    <li class="active">سفارش @Model.Order.Code</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ls section_padding_top_100 section_padding_bottom_75">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+                <div class="table-responsive">
+                    <table class="table cart-table topmargin_0 tbl-basket">
+                        <thead>
+                            <tr>
+                                <td class="product-info border-left">محصول</td>
+                                <td class="product-price-td">تصویر</td>
+                                <td class="product-quantity">قیمت</td>
+                                <td class="product-subtotal">تعداد</td>
+                                <td class="product-info">جمع کل</td>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model.OrderDetails)
+                            {
+                                <tr class="cart_item">
+                                    <td class="product-price border-left">
+                                        <span class="amount">@order.Product.Title</span>
+                                    </td>
+                                    <td class="product-price">
+                                        <div class="media">
+                                            <div class="media-right">
+                                                <a href="/product/@order.Product.Code">
+                                                    <img class="media-object cart-product-image" src="@order.Product.ImageUrl" alt="@order.Product.Title">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="product-price">
+
+                                        <span class="amount">@order.AmountStr</span> <text>تومان</text>
+
+                                    </td>
+                                    <td class="product-price">
+
+                                        <span class="amount">@order.Quantity</span>
+
+                                    </td>
+                                    <td class="product-price">
+
+                                        <span class="amount">@order.RawAmountStr</span> <text>تومان</text>
+
+                                    </td>
+                                    
+                                </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</section>
+

@@ -1,0 +1,65 @@
+﻿@model ViewModels.SellerListViewModel
+@{
+    Layout = "~/Views/Shared/FrontEndLayout/_FronEndLayout.cshtml";
+    ViewBag.Title = "لیست هنرمندان | ";
+}
+<section class="page_breadcrumbs ls ms section_padding_bottom_15 section_padding_top_75" style="background-image: url('@ViewBag.HeaderImage');">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="heading text-center bottom_border">
+                    <p class="text-uppercase josefin grey fontsize_20">هنرمندان</p>
+                    <h1 class="section_header topmargin_5">لیست هنرمندان</h1>
+                </div>
+                <ol class="breadcrumb dirrtl">
+                    <li>
+                        <a href="./">
+                            خانه
+                        </a>
+                    </li>
+                    <li class="active">لیست هنرمندان</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ls section_padding_top_100 section_padding_bottom_30">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="seller-list">
+                    @foreach (var seller in Model.Sellers)
+                    {
+                        <div class="col-lg-4 col-md-4 col-sm-6 content-padding gallery-extended-item text-center">
+                            <div class="item-media">
+                                <img src="@seller.ImageUrl" alt="">
+                                <div class="media-links">
+                                    <a class="abs-link" title="" href="/artist/@seller.Id"></a>
+                                </div>
+                            </div>
+                            <div class="item-content with_background">
+                                <h3 class="item-title">
+                                    <a href="/artist/@seller.Id">@seller.Title</a>
+                                </h3>
+	                            @*<span class="categories-links">
+                                    <a rel="category" href="#">Category 1</a>
+                                </span>*@
+														 
+																<p>@seller.Summery</p>
+														 
+                                <div class="item-button">
+                                    <a href="/artist/@seller.Id" class="theme_button wide_button inverse">ادامه</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    
+                   
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+

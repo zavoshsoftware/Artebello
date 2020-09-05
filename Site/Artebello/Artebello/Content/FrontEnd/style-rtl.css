@@ -1,0 +1,283 @@
+﻿@font-face {
+    font-family: 'Iransans';
+    src: url(/fonts/IranSans/IRANSansWebFaNum.eot) format('embedded-opentype'), url(/fonts/IranSans/IRANSansWebFaNum.woff2) format('woff2'), url(/fonts/IranSans/IRANSansWebFaNum.woff) format('woff'), url(/fonts/IranSans/IRANSansWebFaNum.ttf) format('truetype');
+}
+
+body, p, a, h1, h2, h3, h4, h5, h6, ul, li, input, button, table, th, td, .breadcrumbs-menu li, .contact-form button {
+    font-family: IRANSans;
+}
+
+.logo-img img {
+    max-width: 80%;
+}
+
+.sf-menu li ul {
+    text-align: right;
+    direction: rtl
+}
+
+.flex-control-paging li a {
+    font-family: 'Open Sans', sans-serif;
+}
+
+#home-history {
+    direction: rtl;
+}
+
+.section-title {
+    padding: 65px 0;
+}
+
+    .section-title h2 {
+        text-align: center;
+    }
+
+.price {
+    direction: rtl;
+}
+
+.dirrtl {
+    direction: rtl;
+}
+
+    .dirrtl .heading p:after {
+        right: auto;
+        left: -1025px;
+    }
+
+.item-content {
+    direction: rtl;
+    text-align: right;
+}
+
+.blog_filters {
+    direction: rtl;
+    text-align: right;
+}
+
+.darklinks {
+    direction: rtl;
+    text-align: right;
+}
+
+    .darklinks .theme_link, .blog-filters-container .heading h2 {
+        direction: rtl;
+        text-align: right;
+    }
+
+.page_footer {
+    direction: rtl;
+}
+
+.summary h1, .summary .product-rating, .summary .woocommerce-product-rating {
+    text-align: right;
+    direction: rtl;
+}
+
+.product_meta, .summary .price, .stock, .cart {
+    text-align: right;
+    direction: rtl;
+}
+
+.checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
+    margin-left: unset;
+    margin-right: -20px;
+}
+
+.nav-tabs > li {
+    float: right;
+}
+
+.product-desc {
+    text-align: justify;
+    direction: rtl;
+}
+
+.text-justify {
+    text-align: justify;
+    direction: rtl;
+}
+
+.comments-area h2, .comment-respond h3 {
+    text-align: right;
+}
+
+#comment-succes, #comment-reject {
+    display: none;
+    text-align: right;
+    direction: rtl;
+}
+
+.ls input[type="text"], .ls input[type="email"], .ls input[type="url"], .ls input[type="password"], .ls input[type="search"], .ls input[type="tel"], .ls textarea, .ls select, .ls .form-control {
+    text-align: right;
+}
+
+.media-body {
+    text-align: right;
+    direction: rtl;
+}
+
+.comment-meta {
+    margin-right: unset;
+    margin-left: 40px;
+}
+
+.media-right {
+    float: right;
+}
+
+@media (min-width: 992px) {
+    .comment-list ol {
+        padding-right: 70px;
+        padding-left: unset;
+    }
+}
+
+#relatedProducts img {
+    width: 350px;
+    height: 350px;
+}
+
+    #relatedProducts img:hover {
+        transform: scale(1.1);
+    }
+
+.item-title {
+    text-align: center;
+    direction: rtl;
+    padding: 15px 5px;
+    font-size: 16px;
+}
+
+    .item-title a {
+        color: #000;
+    }
+
+
+.new-price {
+    direction: rtl;
+}
+
+.tbl-basket {
+    direction: rtl;
+    border-right: 1px solid rgba(48, 48, 48, 0.5);
+}
+
+.tbl-chk {
+    direction: rtl;
+    border-right: 1px solid rgba(48, 48, 48, 0.5);
+}
+
+.cart_totals h4 {
+    direction: rtl;
+}
+
+.coupon {
+    margin: 60px 0 30px;
+    direction: rtl;
+}
+
+.shipping-calculator-form {
+    direction: rtl;
+}
+
+
+#SuccessDiv, #errorDiv, #error-box, .activate, #error-box2 {
+    display: none;
+}
+
+.post-adds {
+    border-right: unset;
+    border-left: 3px solid #95c6d8;
+}
+
+h3.entry-title, .blog-header {
+    text-align: right;
+    direction: rtl;
+}
+
+.entry-content p, .blog-more p {
+    text-align: justify;
+    direction: rtl;
+}
+
+.item-content p {
+    text-align: justify;
+}
+
+.seller-content {
+    text-align: justify;
+    direction: rtl;
+}
+
+.media-object {
+    height: 50px;
+}
+
+.login-main {
+    box-shadow: 3px 3px #d5dce7cc;
+    border: 1px solid #ccc;
+}
+
+.login-form {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0;
+    direction: rtl;
+}
+
+    .login-form input {
+        margin-bottom: 5px;
+    }
+
+#error-box-login, #otp-form, #error-box-register, #register-form, #error-box-otp {
+    display: none;
+}
+
+.mp5 {
+    padding: 5px;
+}
+
+.border-left {
+    border-left: 1px solid rgba(48, 48, 48, 0.5);
+}
+
+.teaser .media-left {
+    padding-left: 20px;
+}
+
+.borderd-media img {
+    border: 8px solid #000;
+}
+
+
+@media screen and (min-width: 992px) {
+    .mainmenu_wrapper .mega-menu-col {
+        border-right: none;
+        border-left: none;
+    }
+
+        .mainmenu_wrapper .mega-menu-col:last-child {
+            border-left: none;
+        }
+
+    .mainmenu_wrapper .mega-menu-image {
+       cursor:pointer;
+    }
+
+        .mainmenu_wrapper .mega-menu-image:before {
+            background: #fff;
+            content: '';
+            display: block;
+            position: absolute;
+            top: -15px;
+            left: 203px;
+            right: -5px;
+            bottom: -25px;
+            z-index: 0;
+        }
+
+        .mainmenu_wrapper .mega-menu-image a {
+            color: #fff;
+        }
+}

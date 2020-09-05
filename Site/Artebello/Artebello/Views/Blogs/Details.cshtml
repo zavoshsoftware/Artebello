@@ -1,0 +1,105 @@
+﻿@model ViewModels.BlogDetailViewModel
+
+@{
+    Layout = "~/Views/Shared/FrontEndLayout/_FronEndLayout.cshtml";
+    ViewBag.Title = Model.Blog.Title + " | ";
+}
+<section class="page_breadcrumbs ls ms section_padding_bottom_15 section_padding_top_75" style="background-image: url('@Model.Blog.HeaderUrl');">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="heading text-center bottom_border">
+                    <p class="text-uppercase josefin grey fontsize_20">وبلاگ</p>
+                    <h1 class="section_header topmargin_5">@Model.Blog.Title</h1>
+                </div>
+                <ol class="breadcrumb dirrtl">
+                    <li>
+                        <a href="./">
+                            خانه
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/blog">لیست بلاگ ها</a>
+                    </li>
+                    <li class="active">@Model.Blog.Title</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ls section_padding_110">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 col-sm-push-1">
+                <article>
+                    <div class="entry-thumbnail">
+                        <img src="@Model.Blog.HeaderImageUrl" alt="">
+                    </div>
+                    <header class="entry-header bottommargin_25 blog-header">
+                        <div class="post-adds text-right">
+                            <span class="categories-links pull-right">
+                                <a href="#">@Model.BlogCategory.Title</a>
+                            </span>
+                            @*<span class="views-count">
+                                    <i class="flaticon-glasses highlight"></i>
+                                    648 views
+                                </span>
+                                <span class="item-likes">
+                                    <i class="flaticon-shapes highlight"></i>
+                                    152 likes
+                                </span>
+                                <span class="greylinks comments-link">
+                                    <a href="blog-single-full.html#comments">
+                                        <i class="flaticon-interface highlight"></i>
+                                        56
+                                    </a>
+                                </span>*@
+                        </div>
+                        <!-- .entry-meta -->
+                        <h3 class="entry-title topmargin_10">
+                            <a href="blog-single-full.html" rel="bookmark">@Model.Blog.Title</a>
+                        </h3>
+                        <span class="date fontsize_12">
+                            <time datetime="2016-08-01T15:05:23+00:00" class="entry-date">
+                                @Model.Blog.CreationDate.ToShortDateString()
+                            </time>
+                        </span>
+                    </header>
+                    <!-- .entry-header -->
+                    <div class="entry-content">
+                       
+                            @Html.Raw(Model.BlogDetailContent.BlogContent)
+                            @*@Html.Raw(string.Format(Model.Blog.Body.Length > 421 ? Model.Blog.Body.Substring(0, 421)  : Model.Blog.Body))*@
+
+                       
+                        <div id="blog-more" class="blog-more collapse">
+                            @if (!string.IsNullOrEmpty(Model.BlogDetailContent.BlogMore))
+                            {
+                                 @Html.Raw(Model.BlogDetailContent.BlogMore)
+
+
+                                @*@Html.Raw(Model.Blog.Body.Substring(421))*@
+                           
+                            }
+                            @*@Html.Raw(string.Format(Model.Blog.Body.Length > 200 ? Model.Blog.Body.Substring(200, 400) + "..." : Model.Blog.Body))*@
+
+
+                        </div>
+                        <!-- eof blog-more -->
+                        <div class="greylinks text-center">
+                            <a class="blog-more-toggle collapsed" data-toggle="collapse" href="#blog-more" aria-expanded="false" aria-controls="blog-more">
+                                <span class="blog-more-hidden">نمایش بیشتر</span>
+                                <span class="blog-more-visible">نمایش کمتر</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- .entry-content -->
+
+
+                </article>
+
+            </div>
+            <!--eof .col-sm-8 (main content)-->
+        </div>
+    </div>
+</section>

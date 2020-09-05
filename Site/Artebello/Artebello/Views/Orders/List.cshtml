@@ -1,0 +1,99 @@
+﻿@model ViewModels.OrderListViewModel
+@{
+    ViewBag.Title = "لیست سفارشات | ";
+    Layout = "~/Views/Shared/FrontEndLayout/_FronEndLayout.cshtml";
+}
+
+<section class="page_breadcrumbs ls ms theme_breadcrumbs parallax section_padding_bottom_15 section_padding_top_75">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="heading text-center bottom_border">
+                    <p class="text-uppercase josefin grey fontsize_20">لیست سفارشات</p>
+                    <h1 class="section_header topmargin_5">لیست سفارشات</h1>
+                </div>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="./">
+                            خانه
+                        </a>
+                    </li>
+
+                    <li class="active"> لیست سفارشات</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ls section_padding_top_100 section_padding_bottom_75">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+                <div class="table-responsive">
+                    <table class="table cart-table topmargin_0 tbl-basket">
+                        <thead>
+                            <tr>
+                                <td class="product-info border-left">کد سفارش</td>
+                                <td class="product-price-td">مبلغ</td>
+                                <td class="product-quantity">تخفیف</td>
+                                <td class="product-subtotal">جمع کل</td>
+                                <td class="product-info">پرداخت شده؟</td>
+                                <td class="product-info">تاریخ سفارش</td>
+                                <td class="product-remove">ویرایش</td>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model.Orders)
+                            {
+                                <tr class="cart_item">
+                                    <td class="product-price border-left">
+                                        <span class="amount">@order.Code</span>
+                                    </td>
+                                    <td class="product-price">
+
+                                        <span class="amount">@order.AmountStr</span> <text>تومان</text>
+
+                                    </td>
+                                    <td class="product-price">
+
+                                        <span class="amount">@order.DiscountAmountStr</span> <text>تومان</text>
+
+                                    </td>
+                                    <td class="product-price">
+
+                                        <span class="amount">@order.TotalAmountStr</span> <text>تومان</text>
+
+                                    </td>
+                                    <td class="product-price">
+
+                                        <input type="checkbox" checked="@order.IsPaid" />
+
+                                    </td>
+                                    <td class="product-desc">
+
+                                        <span class="amount">@order.CreationDateStr</span>
+
+                                    </td>
+                                   <td class="product-remove">
+                                       <a href="/order/@order.Code" class="remove fontsize_24" title="جزئیات">
+                                           <i class="rt-icon2-edit"></i>
+                                       </a>
+                                   </td>
+                                </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</section>
+

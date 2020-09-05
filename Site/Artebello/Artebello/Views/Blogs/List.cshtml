@@ -1,0 +1,126 @@
+﻿@model ViewModels.BlogListViewModel
+@{
+    Layout = "~/Views/Shared/FrontEndLayout/_FronEndLayout.cshtml";
+    ViewBag.Title = " لیست بلاگ ها | ";
+}
+<section class="page_breadcrumbs ls ms section_padding_bottom_15 section_padding_top_75" style="background-image: url('@ViewBag.HeaderImage');">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="heading text-center bottom_border">
+                    <p class="text-uppercase josefin grey fontsize_20">وبلاگ</p>
+                    <h1 class="section_header topmargin_5">لیست بلاگ ها</h1>
+                </div>
+                <ol class="breadcrumb dirrtl">
+                    <li>
+                        <a href="./">
+                            خانه
+                        </a>
+                    </li>
+                    <li class="active">
+                       لیست بلاگ ها
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ls page_portfolio section_padding_top_110">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="isotope_container isotope blog_isotope row masonry-layout columns_margin_bottom_30" data-filters=".blog_filters">
+                    <div class="isotope-item col-lg-3 col-md-4 col-sm-6 @ViewBag.ProductGroups">
+                        <div class="vertical-item vertical-center blog-filters-container">
+                            <div class="item-content">
+                                <div class="display_table">
+                                    <div class="display_table_cell text-left">
+                                        <div class="heading bottommargin_45">
+                                            <p class="text-uppercase josefin grey fontsize_20">گروه بندی</p>
+                                            <h2 class="section_header topmargin_5 bottommargin_0">جدیدترین بلاگ ها</h2>
+                                        </div>
+                                        <div class="filters blog_filters">
+                                            <a href="#" data-filter="*" class="selected">همه</a>
+                                            @foreach (var category in Model.BlogCategories)
+                                            {
+                                                <a href="#" data-filter=".@category.Id">@category.Title</a>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @foreach (var blog in Model.Blogs)
+                    {
+                        <div class="isotope-item col-lg-3 col-md-4 col-sm-6 @blog.BlogCategoryId">
+                            <article class="vertical-item item-type1 post">
+                                <div class="item-media">
+                                    <img src="@blog.ImageUrl" alt="s">
+                                </div>
+                                <div class="item-content">
+                                    <div class="categories-links bottommargin_5 highlight">
+                                        <a href="#">@blog.BlogCategory.Title</a>
+                                    </div>
+                                    <p class="fontsize_18 bold darklinks2">
+                                        <a href="/blog/@blog.UrlParam">
+                                            <span class="text-uppercase">@blog.Title</span> 
+                                        </a>
+                                    </p>
+                                    <div class="item-meta">
+                                        <p>
+                                            @Html.Raw(string.Format(blog.Body.Length>100?blog.Body.Substring(0,100)+"...":blog.Body))
+                                        </p>
+                                    </div>
+                                    <div class="post-social lightgreylinks">
+                                        <a href="#" class="social-icon soc-facebook"></a>
+                                        <a href="#" class="social-icon soc-twitter"></a>
+                                        <a href="#" class="social-icon soc-google"></a>
+                                        <a href="#" class="social-icon soc-instagram"></a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    }
+                   
+
+                </div>
+                <!-- eof .isotope_container.row -->
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ls page_portfolio section_padding_top_15 section_padding_bottom_110">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="with_background line-height0">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#">Prev</a>
+                        </li>
+                        <li class="active">
+                            <a href="#">01</a>
+                        </li>
+                        <li>
+                            <a href="#">02</a>
+                        </li>
+                        <li>
+                            <a href="#">03</a>
+                        </li>
+                        <li>
+                            <a href="#">04</a>
+                        </li>
+                        <li>
+                            <a href="#">05</a>
+                        </li>
+                        <li>
+                            <a href="#">Next</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

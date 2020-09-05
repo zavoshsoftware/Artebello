@@ -1,0 +1,165 @@
+﻿@model ViewModels.OrderDetailsViewModel
+
+@{
+    ViewBag.Title = "جزئیات";
+    Layout = "~/Views/Shared/SellerLayout/_BackEndLayout.cshtml";
+}
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                سفارش @Model.Order.Code
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>کد سفارش: </label>
+                        <span>@Model.Order.Code</span>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>مبلغ سفارش: </label>
+                        <span>@Model.Order.AmountStr تومان</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>مبلغ تخفیف: </label>
+                        <span>@Model.Order.DiscountAmountStr تومان</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>مبلغ نهایی سفارش: </label>
+                        <span>@Model.Order.TotalAmountStr تومان</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>پرداخت شده: </label>
+                        <span><input type="checkbox" checked="@Model.Order.IsPaid" /></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>تاریخ سفارش: </label>
+                        <span>@Model.Order.CreationDateStr </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>تاریخ پرداخت: </label>
+                        <span>@Model.Order.PaymentDate </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                اطلاعات کاربر
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>نام کاربر: </label>
+                        <span>@Model.Order.User.FullName</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>شماره تماس : </label>
+                        <span>@Model.Order.User.CellNum</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>ایمیل : </label>
+                        <span>@Model.Order.Email</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>کد پستی : </label>
+                        <span>@Model.Order.PostalCode</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>شهر : </label>
+                        <span>@Model.Order.City.Title</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>آدرس : </label>
+                        <span>@Model.Order.Address</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>توضیحات : </label>
+                        <span>@Model.Order.Description</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                جزئیات سفارش
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-responsive">
+                            <thead>
+                                <tr>
+                                    <td>
+                                        کد محصول
+                                    </td>
+                                    <td>
+                                        نام محصول
+                                    </td>
+                                    <td>
+                                        تعداد
+                                    </td>
+                                    <td>
+                                        قیمت نهایی
+                                    </td>
+                                    <td>
+                                        تصویر
+                                    </td>
+                                    <td>
+                                        سایز
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var detail in Model.OrderDetails)
+                                {
+                                    <tr>
+                                        <td>@detail.Product.Code</td>
+                                        <td>@detail.Product.Title</td>
+                                        <td>@detail.Quantity</td>
+                                        <td>@detail.AmountStr</td>
+                                        <td><img src="@detail.Product.ImageUrl" width="100" /></td>
+                                        <td>@detail.Product.Size</td>
+                                    </tr>
+                                }
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

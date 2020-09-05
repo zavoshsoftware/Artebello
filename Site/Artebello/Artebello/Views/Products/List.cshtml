@@ -1,0 +1,329 @@
+﻿@model ViewModels.ProductListViewModel
+
+@{
+    Layout = "~/Views/Shared/FrontEndLayout/_FronEndLayout.cshtml";
+    ViewBag.Title = "محصولات | " + Model.ProductGroup.Title + " | ";
+}
+
+
+
+<section class="page_breadcrumbs ls ms parallax section_padding_bottom_15 section_padding_top_75" style="background-image: url('@Model.ProductGroup.HeaderUrl');">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="heading text-center bottom_border">
+                    <p class="text-uppercase josefin grey fontsize_20">محصولات</p>
+                    <h1 class="section_header topmargin_5">@Model.ProductGroup.Title</h1>
+                </div>
+                <ol class="breadcrumb dirrtl">
+                    <li>
+                        <a href="./">
+                            خانه
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/category">محصولات</a>
+                    </li>
+                    <li class="active">@Model.ProductGroup.Title</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ls section_padding_top_100 section_padding_bottom_75">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7 col-md-9 col-lg-9">
+                <div class="storefront-sorting muted_background bottommargin_60 clearfix">
+                    <form class="form-inline dirrtl">
+                        <div class="form-group">
+                            <label class="grey" for="orderby">مرتب سازی بر اساس:</label>
+                            <select class="form-control orderby" name="orderby" id="orderby">
+                                <option value="menu_order" selected>پیش فرض</option>
+                                <option value="popularity">قیمت</option>
+                                <option value="rating">جدیدترین</option>
+                                <option value="date">پرطرفدار ترین</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <a href="#" id="sort_view">
+                                <i class="fa fa-long-arrow-up"></i>
+                            </a>
+                            <a href="#" id="toggle_shop_view" class=""></a>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="columns-3">
+                    <ul id="products" class="products list-unstyled grid-view">
+                        @foreach (var product in Model.Products)
+                        {
+                            <li class="product type-product">
+                                <div class="side-item">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="item-media borderd-media">
+                                                <a href="/product/@product.Code">
+                                                    <img src="@product.ImageUrl" alt="" />
+                                                    @if (product.Quantity == 0)
+                                                    {
+                                                        <span class="newproduct">ناموجود</span>
+                                                    }
+                                                </a>
+                                                <div class="product-buttons">
+                                                    <a href="#" rel="nofollow" class="favorite_button">
+                                                        <i class="rt-icon2-heart"></i>
+                                                    </a>
+                                                    <a href="#" rel="nofollow" class="add_to_cart_button">
+                                                        <i class="rt-icon2-basket"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <h3>
+                                                <a href="/product/@product.Code">@product.Title</a>
+                                            </h3>
+                                            <h5>
+                                                <a href="/artist/@product.SellerId">@product.Seller.Title</a>
+                                            </h5>
+                                            <p class="new-price">
+                                                @if (product.IsInPromotion)
+                                                {
+                                                    <del>
+                                                        <span class="amount">@string.Format("{0:n0}", product.AmountStr)</span>
+                                                    </del>
+                                                }
+                                                <ins>
+                                                    <span class="amount">@string.Format("{0:n0}", product.DiscountAmountStr) تومان</span>
+                                                </ins>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="item-content">
+                                                <h3>
+                                                    <a href="/product/@product.Code">@product.Title</a>
+                                                </h3>
+                                                <h4>توضیحات محصول</h4>
+                                                <p class="product-description">
+                                                    @product.Summery
+                                                </p>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        }
+
+                    </ul>
+                </div>
+                <!-- eof .columns-* -->
+
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <ul class="pagination small with_background">
+                            <li >
+                                <a href="#"></a>
+                            </li>
+                            <li class="active" id="pagenum_1">
+                                <a href="#" onclick="Filter('page','');">1</a>
+                            </li>
+                            @if (Model.PageNumber > 1)
+                            {
+                                for (int i = 2; i <= Model.PageNumber; i++)
+                                {
+                                    <li id="pagenum_@i">
+                                        <a href="#" onclick="Filter('page','@i');">@i</a>
+                                    </li>
+                                }
+                            }
+                            <li>
+                                <a href="#"></a>
+                            </li>
+                            @*<li>
+                                    <a href="#">03</a>
+                                </li>
+                                <li>
+                                    <a href="#">04</a>
+                                </li>
+                                <li>
+                                    <a href="#">05</a>
+                                </li>
+                                <li>
+                                    <a href="#">بعدی</a>
+                                </li>*@
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <!--eof .col-sm-8 (main content)-->
+            <!-- sidebar -->
+            <aside class="col-sm-5 col-md-3 col-lg-3">
+
+                <div class="widget widget_search">
+                    <form method="get" class="searchform form-inline" action="/">
+                        <div class="form-group">
+                            <label class="screen-reader-text" for="widget-search">جستجو:</label>
+                            <input id="widget-search" type="text" value="" name="search" class="form-control" placeholder="جستجو">
+                        </div>
+                        <button type="submit" class="theme_button">جستجو</button>
+                    </form>
+                </div>
+                <div class="widget widget_price_filter">
+                    <div class="widget-title">
+                        <h3>فیلتر قیمت</h3>
+                    </div>
+                    <!-- price slider -->
+                    <form method="get" action="/" class="form-inline">
+                        <div class="slider-range-price"></div>
+                        <div class="form-group">
+                            <input type="text" class="slider_price_max form-control text-center" id="slider_price_max" readonly>
+                            <label class="grey" for="slider_price_max">تا: </label>
+
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="slider_price_min form-control text-center" id="slider_price_min" readonly>
+                            <label class="grey" for="slider_price_min">از: </label>
+
+                        </div>
+                        <div class="text-right">
+                            <button type="button" class="theme_button small_button color1" onclick="PriceFilter();">فیلتر</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="widget widget_tag_cloud widget_product_tag_cloud">
+                    <div class="widget-title">
+                        <h3>ابعاد</h3>
+                    </div>
+                    <div class="tagcloud dirrtl">
+                        @foreach (var item in Model.SidebarProductOrientations)
+                        {
+                            <a href="#" onclick="Filter('orientation','@item.Id');">@item.Title</a>
+                        }
+                        @*<a href="#" title="">مربع</a>
+                            <a href="#" title="">مستطیل عمودی</a>
+                            <a href="#" title="">مستطیل افقی</a>*@
+                    </div>
+                </div>
+
+                <div class="widget widget_layered_nav">
+                    <div class="widget-title">
+                        <h3>رنگ</h3>
+                    </div>
+                    <ul class="list-unstyled color-filters">
+                        @foreach (var item in Model.ProductColors)
+                        {
+                            <li>
+                                <a href="#" onclick="Filter('color','@item.ProductColor.HexCode');" data-background-color="#@item.ProductColor.HexCode">@item.ProductColor.Title</a>
+                                <span class="count grey">@item.Quantity</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+                <div class="with_background">
+                    <div class="widget widget_layered_nav widget_categories">
+                        <div class="widget-title">
+                            <h3>سایر گروه محصولات</h3>
+                        </div>
+                        <ul class="list-unstyled greylinks dirrtl">
+                            @foreach (var item in Model.SidebarProductGroups)
+                            {
+                                <li>
+                                    <a href="/category/@item.ProductGroup.UrlParam" class="white">@item.ProductGroup.Title</a>
+                                    <span class="count highlight">@item.Quantity</span>
+                                </li>
+                            }
+
+
+                        </ul>
+                    </div>
+                </div>
+
+            </aside>
+            <!-- eof aside sidebar -->
+
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script>
+    $(document).ready(function () {
+        for (var i = 1; i < 5; i++) {
+            $("#pagenum_" + i).removeClass('active');
+        }
+        var page = 1;
+        if (getCookie("page") != "") {
+            page = getCookie("page");
+        }
+        $("#pagenum_" + page).addClass('active');
+    })
+    function PriceFilter() {
+        var from = $("#slider_price_min").val();
+        var to = $("#slider_price_max").val();
+        var range = from + '/' + to;
+
+        Filter('range', range);
+    }
+    function Filter(type, value) {
+
+        document.cookie = type + "=" + (value || "") + "; path=/";
+        var range = '';
+        var orientation = '';
+        var color = '';
+        var page = '';
+
+
+        if (getCookie("range") != "") {
+            range = getCookie("range");
+        }
+
+        if (getCookie("orientation") != "") {
+            orientation = getCookie("orientation");
+        }
+
+        if (getCookie("color") != "") {
+            color = getCookie("color");
+        }
+
+        if (getCookie("page") != "") {
+            page = getCookie("page");
+        }
+
+        window.location.href = '/category/' + '@Model.ProductGroup.UrlParam' + '?page=' + page +'&&range=' + range + '&&orientation=' + orientation + '&&color=' + color;
+    }
+
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return "";
+    }
+
+    //function delete_cookie(name) {
+    //    if (getCookie(name) != "") {
+    //        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    //    }
+    //}
+    //$(window).on('unload', function () {
+    //    delete_cookie("range");
+    //});
+    //$(window).unload(function () {
+    //    localStorage.clear();
+    //});
+    //window.addEventListener("beforeunload", function () {
+    //    alert(111);
+    //    delete_cookie("range");
+    //    delete_cookie("orientation");
+    //    delete_cookie("color");
+    //});
+    </script>}

@@ -1,0 +1,84 @@
+﻿@model ViewModels.AboutViewModel
+@{
+    ViewBag.Title = "درباره ما | " ;
+    Layout = "~/Views/Shared/FrontEndLayout/_FronEndLayout.cshtml";
+}
+
+<section class="page_breadcrumbs ls ms section_padding_bottom_15 section_padding_top_75" style="background-image: url('@ViewBag.HeaderImage');">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="heading text-center bottom_border">
+                    <p class="text-uppercase josefin grey fontsize_20">Artebello</p>
+                    <h1 class="section_header topmargin_5">درباره ما</h1>
+                </div>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="/">
+                            خانه
+                        </a>
+                    </li>
+                  
+                    <li class="active"> درباره ما</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ls section_padding_top_110 columns_margin_0 image-overflow">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10 col-lg-offset-0 col-lg-6 text-center text-lg-left to_animate animated fadeInRight" data-animation="fadeInRight">
+                <img src="@Model.About.ImageUrl" alt="" class="top-overlap-small right-offset">
+            </div>
+            <div class="col-md-offset-1 col-md-10 col-lg-offset-0 col-lg-6 text-right">
+                <div class="heading bottommargin_40">
+                    <p class="text-uppercase josefin grey fontsize_20">@Model.About.Title</p>
+                    <h2 class="section_header topmargin_5 bottommargin_0">@Model.About.Summery</h2>
+                </div>
+                <p>
+                   @Html.Raw(Model.About.Body)
+                </p>
+               
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<section class="ls ms section_padding_top_110 columns_margin_0 services bg-gradient">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-push-3 col-md-9 col-lg-push-4 col-lg-8 dirrtl">
+                <div class="heading bottommargin_60">
+                    <p class="text-uppercase josefin grey fontsize_20">@Model.Titr.Title</p>
+                    <h2 class="section_header bottommargin_0">@Model.Titr.Summery</h2>
+                </div>
+                <div class="row topmargin_5">
+                    @foreach (var service in Model.Services)
+                    {
+                        <div class="col-sm-6">
+                            <div class="teaser media bottommargin_55">
+                                <div class="media-right">
+                                    <div class="teaser_icon highlight size_normal">
+                                        <i class="flaticon-earth-globe"></i>
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        <a href="#">@service.Title</a>
+                                    </h4>
+                                    <p>@Html.Raw(service.Body)</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-pull-9 col-md-3 col-lg-pull-8 col-lg-4 text-center text-md-right to_animate" data-animation="fadeInLeft">
+                <img src="@Model.Titr.ImageUrl" alt="" class="top-overlap-small">
+            </div>
+        </div>
+    </div>
+</section>
+

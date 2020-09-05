@@ -1,0 +1,88 @@
+﻿@model ViewModels.SellerDetailViewModel
+
+@{
+    Layout = "~/Views/Shared/FrontEndLayout/_FronEndLayout.cshtml";
+    ViewBag.Title = Model.Seller.Title + " | ";
+}
+<section class="page_breadcrumbs ls ms section_padding_bottom_15 section_padding_top_75" style="background-image: url('@Model.Seller.HeaderUrl');">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="heading text-center bottom_border">
+                    <p class="text-uppercase josefin grey fontsize_20">هنرمندان</p>
+                    <h1 class="section_header topmargin_5">@Model.Seller.Title</h1>
+                </div>
+                <ol class="breadcrumb dirrtl">
+                    <li>
+                        <a href="/">
+                            خانه
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/artists">
+                            لیست هنرمندان
+                        </a>
+                    </li>
+                    <li class="active">@Model.Seller.Title</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ls model-single section_padding_95 columns_padding_25">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 col-md-push-7">
+                <div class="vertical-item bottommargin_60">
+                    <div class="item-media">
+                        <img src="@Model.Seller.ImageUrl" alt="">
+                    </div>
+                    <div class="item-content with_background with_padding">
+                        <h3 class="text-uppercase">@Model.Seller.Title</h3>
+                      
+                    </div>
+                    <div class="ds item-social darklinks text-center">
+                        <a href="#" class="social-icon soc-facebook"></a>
+                        <a href="#" class="social-icon soc-twitter"></a>
+                        <a href="#" class="social-icon soc-google"></a>
+                        <a href="#" class="social-icon soc-instagram"></a>
+                    </div>
+                  
+                </div>
+            </div>
+            <div class="col-md-7 col-md-pull-5 seller-content">
+                <h2 class="text-uppercase bottommargin_30 fontsize_40 text-right">درباره @Model.Seller.Title</h2>
+                <p>
+                @Html.Raw(Model.Seller.Body)   
+                </p>
+                <div class="filters isotope_filters topmargin_50 bottommargin_40">
+                    <a href="#" data-filter="*" class="selected">همه</a>
+                    @foreach (var item in Model.SellerDetail.ProductGroups)
+                    {
+                        <a href="#" data-filter=".@item.Id">@item.Title</a>
+
+                    }
+                </div>
+                <div class="isotope_container isotope row columns_padding_5 masonry-layout" data-filters=".isotope_filters">
+                    @foreach (var item in Model.SellerDetail.Products)
+                    { <div class="isotope-item bottommargin_10 col-md-3 col-sm-4 col-xs-6 @item.ProductGroupId">
+                        <div class="vertical-item gallery-item content-absolute text-center cs">
+                            <div class="item-media">
+                                <img src="@item.ImageUrl" alt="">
+                                <div class="media-links">
+                                    <a class="abs-link" title="" href="/product/@item.Code"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    }
+                   
+                   
+                </div>
+                <!-- eof .isotope_container.row -->
+              
+            </div>
+        </div>
+    </div>
+</section>
