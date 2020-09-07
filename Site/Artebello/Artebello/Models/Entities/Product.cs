@@ -23,12 +23,12 @@ namespace Models
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
         public int Code { get; set; }
 
-        
+
         [Display(Name = "Title", ResourceType = typeof(Resources.Models.Product))]
         [StringLength(250, ErrorMessage = "طول {0} نباید بیشتر از {1} باشد")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
         public string Title { get; set; }
-        
+
         [Display(Name = "Amount", ResourceType = typeof(Resources.Models.Product))]
         [Column(TypeName = "Money")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
@@ -58,8 +58,10 @@ namespace Models
         [Display(Name = "متریال")]
         public string Material { get; set; }
 
-        [Display(Name= "وزن(کیلوگرم)")]
-        public int? Weight { get; set; }
+        [Display(Name = "وزن(کیلوگرم)")]
+        public decimal? Weight { get; set; }
+        [Display(Name = "موجود؟")]
+        public bool IsAvailable { get; set; }
 
         [Display(Name = "موجودی")]
         public int? Quantity { get; set; }
@@ -129,7 +131,7 @@ namespace Models
 
 
         [NotMapped]
-        [Display(Name = "Amount", ResourceType = typeof(Resources.Models.Order))]
+        [Display(Name = "DiscountAmount", ResourceType = typeof(Resources.Models.Order))]
         public string DiscountAmountStr
         {
             get

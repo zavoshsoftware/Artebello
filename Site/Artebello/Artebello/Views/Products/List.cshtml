@@ -66,18 +66,18 @@
                                             <div class="item-media borderd-media">
                                                 <a href="/product/@product.Code">
                                                     <img src="@product.ImageUrl" alt="" />
-                                                    @if (product.Quantity == 0)
+                                                    @if (!product.IsAvailable)
                                                     {
                                                         <span class="newproduct">ناموجود</span>
                                                     }
                                                 </a>
-                                                @if (product.Quantity > 0)
+                                                @if (product.IsAvailable)
                                                 {
                                                     <div class="product-buttons">
-                                                        <a href="#" rel="nofollow" class="favorite_button">
+                                                        @*<a href="#" rel="nofollow" class="favorite_button">
                                                             <i class="rt-icon2-heart"></i>
-                                                        </a>
-                                                        <a href="#" rel="nofollow" class="add_to_cart_button">
+                                                        </a>*@
+                                                        <a href="#" rel="nofollow" class="add_to_cart_button"  onclick="addToBasket(@product.Code,1);">
                                                             <i class="rt-icon2-basket"></i>
                                                         </a>
                                                     </div>

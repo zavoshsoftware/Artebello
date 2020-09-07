@@ -36,7 +36,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Body, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                        @Html.EditorFor(model => model.Body)
+                        @Html.TextAreaFor(model => model.Body)
     
                     @Html.ValidationMessageFor(model => model.Body)
                 </div>
@@ -44,18 +44,28 @@
     
             <div class="form-group">
                 @Html.LabelFor(model => model.ImageUrl, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-5">
                         @Html.Kendo().Upload().Name("fileUpload").Multiple(false)
                     @Html.ValidationMessageFor(model => model.ImageUrl)
+                </div>
+                <div class="col-md-5">
+                    <div class="alert alert-danger">
+                        <h5>برای آپلود تصویر موارد زیر را رعایت نمایید</h5>
+                        <p>حداکثر حجم مجاز 1 مگابایت است</p>
+                        <p>عکس بدون انعکاس فلش و نورافتادگی باشد</p>
+                        <p>عکس crop شده باشد</p>
+                        <p>عکس اثر از لحاظ رنگی با خود اثر مطابق باشد</p>
+                    </div>
                 </div>
             </div>
     
                 <div class="form-group">
                     @Html.LabelFor(model => model.Dimensions, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-5">
                         @Html.EditorFor(model => model.Dimensions)
 
                         @Html.ValidationMessageFor(model => model.Dimensions)
+                        <dfn>ابعاد به سانتی متر وارد شود</dfn>
                     </div>
                 </div>
 
@@ -77,14 +87,14 @@
                     </div>
                 </div>
     
-            <div class="form-group">
+            @*<div class="form-group">
                 @Html.LabelFor(model => model.Quantity, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                         @Html.EditorFor(model => model.Quantity)
     
                     @Html.ValidationMessageFor(model => model.Quantity)
                 </div>
-            </div>
+            </div>*@
     
             <div class="form-group">
                 @Html.LabelFor(model => model.CreateYear, new { @class = "control-label col-md-2" })
@@ -159,7 +169,16 @@
                     @Html.ValidationMessageFor(model => model.DiscountAmount)
                 </div>
             </div>*@
-    
+                <div class="form-group">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.IsAvailable)
+
+                        @Html.LabelFor(model => model.IsAvailable)
+                        @Html.ValidationMessageFor(model => model.IsAvailable)
+                    </div>
+                </div>
             <div class="form-group">
     			<div class="col-md-2">
                 </div>

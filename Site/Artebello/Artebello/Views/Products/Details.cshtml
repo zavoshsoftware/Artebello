@@ -90,7 +90,7 @@
 
                             <ul class="list1 no-bullets">
                                 <li>
-                                    @if (Model.Product.Quantity > 0)
+                                    @if (Model.Product.IsAvailable)
                                     {
                                         <p class="price">
                                             @if (Model.Product.IsInPromotion)
@@ -145,7 +145,7 @@
                                     <span>: @Model.Product.ProductTheme.Title </span>
 
                                 </div>
-                                @if (Model.Product.Quantity > 0)
+                                @if (Model.Product.IsAvailable)
                                 {
                                     <button class="theme_button color1" type="button" onclick="addToBasket(@Model.Product.Code,1);">افزودن به سبد خرید</button>
                                 }

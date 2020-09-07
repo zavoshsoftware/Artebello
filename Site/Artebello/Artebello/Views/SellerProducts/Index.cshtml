@@ -18,15 +18,15 @@
                                                           
             columns.Bound(model => model.Code);
             columns.Bound(model => model.Title);
-            columns.Bound(model => model.Amount);
+            columns.Bound(model => model.AmountStr);
     		columns.Bound(model => model.ImageUrl).Template(@<text><img src="@item.ImageUrl" height="100px" /></text>);
-                        columns.Bound(model => model.Quantity);
-                        columns.Bound(model => model.CreateYear);
-                        columns.Bound(model => model.DiscountAmount);
-                        columns.Bound(model => model.IsInPromotion);
+                      //columns.Bound(model => model.Quantity);
+                      columns.Bound(model => model.CreateYear);
+                      //columns.Bound(model => model.DiscountAmountStr);
+                      columns.Bound(model => model.IsInPromotion);
                       //columns.Bound(model => model.IsInHome);
-                      //columns.Bound(model => model.IsActive);
-                      columns.Bound(model => model.CreationDate);
+                      columns.Bound(model => model.IsAvailable);
+                        columns.Bound(model => model.CreationDate);
                         columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false)
                                 .Template(@<text>
     									@Html.ActionLink("ویرایش", "Edit", new {id = @item.Id}, new {@class = "k-button"})

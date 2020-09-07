@@ -186,6 +186,14 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.IsAvailable, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsAvailable)
+                @Html.ValidationMessageFor(model => model.IsAvailable)
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.IsInPromotion, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.IsInPromotion)
