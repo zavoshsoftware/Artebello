@@ -38,18 +38,22 @@
 
                 <div itemscope="" itemtype="http://schema.org/Product" class="product type-product row">
                     <div class="images col-sm-6">
-                        <a href="images/shop/01.jpg" itemprop="image" class="main-image zoom" title="" data-gal="prettyPhoto[product-gallery]">
-                            @*<span class="onsale">حراج</span>
-                                <span class="newproduct">جدید</span>*@
+                        <a href="@Model.Product.ImageUrl" itemprop="image" class="main-image zoom" title="" data-gal="prettyPhoto[product-gallery]">
+
                             <img src="@Model.Product.ImageUrl" class="attachment-shop_single wp-post-image" alt="" title="">
+                            @if (!Model.Product.IsAvailable)
+                            {
+                                <span class="newproduct">ناموجود</span>
+                            }
                         </a>
-                        <div id="product-thumbnails" class="owl-carousel thumbnails product-thumbnails" data-loop="true" data-center="true" data-margin="10" data-nav="false" data-dots="true" data-items="3" data-responsive-lg="3" data-responsive-md="3" data-responsive-sm="2"
+                        <div id="product-thumbnails" class="owl-carousel thumbnails product-thumbnails" data-loop="true" data-margin="10" data-nav="false" data-dots="true" data-items="3" data-responsive-lg="3" data-responsive-md="3" data-responsive-sm="2"
                              data-responsive-xs="2">
 
                             @foreach (var image in Model.ProductImages)
                             {
                                 <a href="@image.ImageUrl" class="zoom first" title="" data-gal="prettyPhoto[product-gallery]">
                                     <img src="@image.ImageUrl" class="attachment-shop_thumbnail" alt="@image.Title">
+
                                 </a>
                             }
                         </div>
@@ -105,7 +109,10 @@
                                         </p>
 
                                     }
-
+                                    @*else
+                                    {
+                                        <h4 class="grey text-right ">ناموجود</h4>
+                                    }*@
                                 </li>
                             </ul>
 
