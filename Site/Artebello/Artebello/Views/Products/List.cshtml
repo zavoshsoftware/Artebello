@@ -2,7 +2,7 @@
 
 @{
     Layout = "~/Views/Shared/FrontEndLayout/_FronEndLayout.cshtml";
-    ViewBag.Title = "محصولات | " + Model.ProductGroup.Title + " | ";
+    ViewBag.Title = "آثار | " + Model.ProductGroup.Title + " | ";
 }
 
 
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-sm-12 text-center">
                 <div class="heading text-center bottom_border">
-                    <p class="text-uppercase josefin grey fontsize_20">محصولات</p>
+                    <p class="text-uppercase josefin grey fontsize_20">آثار</p>
                     <h1 class="section_header topmargin_5">@Model.ProductGroup.Title</h1>
                 </div>
                 <ol class="breadcrumb dirrtl">
@@ -22,7 +22,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/category">محصولات</a>
+                        <a href="/category">آثار</a>
                     </li>
                     <li class="active">@Model.ProductGroup.Title</li>
                 </ol>
@@ -71,14 +71,17 @@
                                                         <span class="newproduct">ناموجود</span>
                                                     }
                                                 </a>
-                                                <div class="product-buttons">
-                                                    <a href="#" rel="nofollow" class="favorite_button">
-                                                        <i class="rt-icon2-heart"></i>
-                                                    </a>
-                                                    <a href="#" rel="nofollow" class="add_to_cart_button">
-                                                        <i class="rt-icon2-basket"></i>
-                                                    </a>
-                                                </div>
+                                                @if (product.Quantity > 0)
+                                                {
+                                                    <div class="product-buttons">
+                                                        <a href="#" rel="nofollow" class="favorite_button">
+                                                            <i class="rt-icon2-heart"></i>
+                                                        </a>
+                                                        <a href="#" rel="nofollow" class="add_to_cart_button">
+                                                            <i class="rt-icon2-basket"></i>
+                                                        </a>
+                                                    </div>
+                                                }
                                             </div>
                                             <h3>
                                                 <a href="/product/@product.Code">@product.Title</a>
@@ -124,7 +127,7 @@
                 <div class="row">
                     <div class="col-sm-12 text-center">
                         <ul class="pagination small with_background">
-                            <li >
+                            <li>
                                 <a href="#"></a>
                             </li>
                             <li class="active" id="pagenum_1">
@@ -228,7 +231,7 @@
                 <div class="with_background">
                     <div class="widget widget_layered_nav widget_categories">
                         <div class="widget-title">
-                            <h3>سایر گروه محصولات</h3>
+                            <h3>سایر گروه آثار</h3>
                         </div>
                         <ul class="list-unstyled greylinks dirrtl">
                             @foreach (var item in Model.SidebarProductGroups)

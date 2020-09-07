@@ -58,7 +58,7 @@ namespace Models
         [Display(Name = "متریال")]
         public string Material { get; set; }
 
-        [Display(Name= "وزن")]
+        [Display(Name= "وزن(کیلوگرم)")]
         public int? Weight { get; set; }
 
         [Display(Name = "موجودی")]
@@ -66,7 +66,7 @@ namespace Models
 
         [Display(Name="سال خلق اثر")]
         public int CreateYear { get; set; }
-
+        [Display(Name = "هنرمند")]
         public Guid? SellerId { get; set; }
         public virtual Seller Seller { get; set; }
 
@@ -82,9 +82,10 @@ namespace Models
         [Display(Name = "سبک")]
         public Guid? ProductMediumId { get; set; }
         public virtual ProductMedium ProductMedium { get; set; }
-        [Display(Name = "رنگ")]
+        [Display(Name = "تم رنگی اثر")]
         public Guid? ProductColorId { get; set; }
         public virtual ProductColor ProductColor { get; set; }
+        [Display(Name = "جهت قرار گیری اثر")]
         public Guid? ProductOrientationId { get; set; }
         public virtual ProductOrientation ProductOrientation { get; set; }
 

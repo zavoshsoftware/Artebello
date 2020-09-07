@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-sm-12 text-center">
                 <div class="heading text-center bottom_border">
-                    <p class="text-uppercase josefin grey fontsize_20">محصولات</p>
+                    <p class="text-uppercase josefin grey fontsize_20">آثار</p>
                     <h1 class="section_header topmargin_5">@Model.Product.Title</h1>
                 </div>
                 <ol class="breadcrumb dirrtl">
@@ -20,7 +20,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/category">محصولات</a>
+                        <a href="/category">آثار</a>
                     </li>
                     <li>
                         <a href="/category/@Model.ProductGroup.UrlParam">@Model.ProductGroup.Title</a>
@@ -40,7 +40,7 @@
                     <div class="images col-sm-6">
                         <a href="images/shop/01.jpg" itemprop="image" class="main-image zoom" title="" data-gal="prettyPhoto[product-gallery]">
                             @*<span class="onsale">حراج</span>
-                            <span class="newproduct">جدید</span>*@
+                                <span class="newproduct">جدید</span>*@
                             <img src="@Model.Product.ImageUrl" class="attachment-shop_single wp-post-image" alt="" title="">
                         </a>
                         <div id="product-thumbnails" class="owl-carousel thumbnails product-thumbnails" data-loop="true" data-center="true" data-margin="10" data-nav="false" data-dots="true" data-items="3" data-responsive-lg="3" data-responsive-md="3" data-responsive-sm="2"
@@ -58,6 +58,7 @@
                     <!-- eof .images -->
                     <div class="summary entry-summary col-sm-6">
                         <h1 itemprop="name" class="product_title entry-title">@Model.Product.Title</h1>
+                        <h4 class="product_title text-right">@Model.Product.Seller.Title</h4>
                         <div class="product-rating" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
                             <div class="star-rating" title="Rated 4.50 out of 5">
                                 <span style="width:90%">
@@ -86,24 +87,28 @@
                             <div itemprop="description" class="product-desc">
                                 <p>@Html.Raw(Model.Product.Summery)</p>
                             </div>
+
                             <ul class="list1 no-bullets">
                                 <li>
-                                    <p class="price">
-                                        @if (Model.Product.IsInPromotion)
-                                        {
-                                            <del>
-                                                <span class="amount">@string.Format("{0:n0}", Model.Product.AmountStr)</span>
-                                            </del>
-                                        }
-                                        <ins>
-                                            <span class="amount">@string.Format("{0:n0}", Model.Product.DiscountAmountStr) تومان</span> 
-                                        </ins>
-                                    </p>
-                                
-                                 
+                                    @if (Model.Product.Quantity > 0)
+                                    {
+                                        <p class="price">
+                                            @if (Model.Product.IsInPromotion)
+                                            {
+                                                <del>
+                                                    <span class="amount">@string.Format("{0:n0}", Model.Product.AmountStr)</span>
+                                                </del>
+                                            }
+                                            <ins>
+                                                <span class="amount">@string.Format("{0:n0}", Model.Product.DiscountAmountStr) تومان</span>
+                                            </ins>
+                                        </p>
+
+                                    }
 
                                 </li>
                             </ul>
+
                             <form class="cart" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="product_size" class="grey">ابعاد</label>
@@ -140,7 +145,10 @@
                                     <span>: @Model.Product.ProductTheme.Title </span>
 
                                 </div>
-                                <button class="theme_button color1" type="button"  onclick="addToBasket(@Model.Product.Code,1);">افزودن به سبد خرید</button>
+                                @if (Model.Product.Quantity > 0)
+                                {
+                                    <button class="theme_button color1" type="button" onclick="addToBasket(@Model.Product.Code,1);">افزودن به سبد خرید</button>
+                                }
 
                             </form>
                         </div>
@@ -180,7 +188,7 @@
                                                 <div class="comment-meta darklinks">
                                                     <a class="author_url" rel="external nofollow" href="#">@comment.Name</a>
                                                 </div>
-                                               
+
                                                 <p>@Html.Raw(comment.Message)</p>
                                                 <span class="comment-date">
                                                     <span class="entry-date">@comment.CreationDate.ToShortDateString()</span>
@@ -188,27 +196,28 @@
                                             </div>
                                         </article>
                                         <!-- .comment-body -->
-                                        @if (!string.IsNullOrEmpty(comment.Response)) { 
-                                        <ol class="children">
-                                            <li class="comment byuser odd alt depth-2 parent">
-                                                <article class="comment-body media">
-                                                    <div class="media-right">
-                                                        <img class="media-object" alt="" src="/images/avatar_default.jpg">
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <div class="comment-meta darklinks">
-                                                            <a class="author_url" rel="external nofollow" href="#">ادمین</a>
+                                        @if (!string.IsNullOrEmpty(comment.Response))
+                                        {
+                                            <ol class="children">
+                                                <li class="comment byuser odd alt depth-2 parent">
+                                                    <article class="comment-body media">
+                                                        <div class="media-right">
+                                                            <img class="media-object" alt="" src="/images/avatar_default.jpg">
                                                         </div>
-                                                        <p>
-                                                            @Html.Raw(comment.Response)
-                                                        </p>
-                                                        
-                                                    </div>
-                                                </article>
-                                                <!-- .comment-body -->
-                                            </li>
-                                            <!-- #comment-## -->
-                                        </ol>
+                                                        <div class="media-body">
+                                                            <div class="comment-meta darklinks">
+                                                                <a class="author_url" rel="external nofollow" href="#">ادمین</a>
+                                                            </div>
+                                                            <p>
+                                                                @Html.Raw(comment.Response)
+                                                            </p>
+
+                                                        </div>
+                                                    </article>
+                                                    <!-- .comment-body -->
+                                                </li>
+                                                <!-- #comment-## -->
+                                            </ol>
                                         }
                                         <!-- .children -->
                                     </li>
@@ -226,7 +235,7 @@
                                 <p class="alert alert-danger" id="comment-reject"></p>
 
                             </div>
-                            <div class="comment-form" id="commentform" >
+                            <div class="comment-form" id="commentform">
                                 <div class="row columns_padding_5">
 
                                     <div class="col-md-6">
@@ -280,23 +289,23 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
-                <h2 class="text-right">محصولات مرتبط</h2>
-               @foreach (var item in Model.RelatedProducts)
-               {
-                   <div class="col-md-4">
-                       <a href="/product/@item.Code">
-                           <img src="@item.ImageUrl" alt="@item.Title" width="400"/>
-                       </a>
-                       <p class="item-title"><a href="/product/@item.Code">@item.Title</a></p>
-                   </div>
-               }
-                </div>
+                <h2 class="text-right">آثار مرتبط</h2>
+                @foreach (var item in Model.RelatedProducts)
+                {
+                    <div class="col-md-4">
+                        <a href="/product/@item.Code">
+                            <img src="@item.ImageUrl" alt="@item.Title" width="400" />
+                        </a>
+                        <p class="item-title"><a href="/product/@item.Code">@item.Title</a></p>
+                    </div>
+                }
             </div>
         </div>
+    </div>
 </section>
 <script>
     function SubmitComment() {
-       
+
         var nameVal = $("#commentName").val();
         var emailVal = $("#commentEmail").val();
         var bodyVal = $("#commentBody").val();

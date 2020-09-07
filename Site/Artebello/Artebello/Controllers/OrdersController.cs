@@ -156,6 +156,7 @@ namespace Artebello.Controllers
             {
                 Orders = db.Orders.Where(o=>o.UserId == userId && o.IsActive && !o.IsDeleted).ToList()
             };
+            ViewBag.HeaderImage = db.Texts.Where(x => x.TextType.Name == "shoppingimage").FirstOrDefault().ImageUrl;
             return View(viewModel);
         }
         [Route("order/{code:int}")]
@@ -168,6 +169,7 @@ namespace Artebello.Controllers
                 Order = order,
                 OrderDetails = db.OrderDetails.Include(current => current.Product).Where(current => current.OrderId == order.Id && current.IsDeleted == false && current.IsActive).ToList()
             };
+            ViewBag.HeaderImage = db.Texts.Where(x => x.TextType.Name == "shoppingimage").FirstOrDefault().ImageUrl;
             return View(viewModel);
         }
     }
