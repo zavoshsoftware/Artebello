@@ -14,7 +14,7 @@ function AppearButton(id, apearId) {
 
 function loginUser() {
     DisappearButton('btn-login', 'loading-box');
-
+    $('#otpFullName').val('');
     var cellNumber = $('#txtCellNum').val();
 
     if (cellNumber !== '') {
@@ -63,7 +63,7 @@ function loginUser() {
 function CompleteRegisterFrom() {
     DisappearButton('btn-register', 'register-loading-box');
 
-    var name = $('#fullName').val();
+    var name = $('#otpFullName').val();
     var isSeller = document.getElementById("isSeller").checked;
     var cellNumber = $('#txtCellNum').val();
 

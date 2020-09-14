@@ -54,7 +54,7 @@ namespace Artebello.Controllers
             cart.DiscountAmount = discountAmount.ToString("n0") + " تومان";
 
             cart.Total = (subTotal - discountAmount).ToString("n0");
-            cart.Provinces = db.Provinces.ToList();
+            cart.Provinces = db.Provinces.OrderBy(current => current.Title).ToList();
             ViewBag.HeaderImage = db.Texts.Where(x => x.TextType.Name == "shoppingimage").FirstOrDefault().ImageUrl;
             return View(cart);
         }
@@ -88,7 +88,7 @@ namespace Artebello.Controllers
         ZarinPalHelper zp = new ZarinPalHelper();
 
         [AllowAnonymous]
-        public ActionResult CheckUser(string email, string cellNumber,  string fullName)
+        public ActionResult CheckUser(string email, string cellNumber, string fullName)
         {
             try
             {
@@ -240,30 +240,30 @@ namespace Artebello.Controllers
         {
             var token = new Token().GetToken("773e6490afdaeccca1206490", "123qwe!@#QWE");
 
-            var ultraFastSend = new UltraFastSend()
-            {
-                Mobile = Convert.ToInt64(cellNumber),
-                TemplateId = 29580,
-                ParameterArray = new List<UltraFastParameters>()
-                {
-                    new UltraFastParameters()
-                    {
-                        Parameter = "verifyCode" , ParameterValue = code
-                    }
-                }.ToArray()
+            //var ultraFastSend = new UltraFastSend()
+            //{
+            //    Mobile = Convert.ToInt64(cellNumber),
+            //    TemplateId = 29580,
+            //    ParameterArray = new List<UltraFastParameters>()
+            //    {
+            //        new UltraFastParameters()
+            //        {
+            //            Parameter = "verifyCode" , ParameterValue = code
+            //        }
+            //    }.ToArray()
 
-            };
+            //};
 
-            UltraFastSendRespone ultraFastSendRespone = new UltraFast().Send(token, ultraFastSend);
+            //UltraFastSendRespone ultraFastSendRespone = new UltraFast().Send(token, ultraFastSend);
 
-            if (ultraFastSendRespone.IsSuccessful)
-            {
+            //if (ultraFastSendRespone.IsSuccessful)
+            //{
 
-            }
-            else
-            {
+            //}
+            //else
+            //{
 
-            }
+            //}
         }
 
 
@@ -318,13 +318,13 @@ namespace Artebello.Controllers
             activationCode.CreationDate = DateTime.Now;
             activationCode.IsDeleted = false;
 
-           db.ActivationCodes.Add(activationCode);
+            db.ActivationCodes.Add(activationCode);
             return code;
         }
 
         public void DeactiveOtherActivationCode(Guid userId)
         {
-            List<ActivationCode> activationCodes =db.ActivationCodes.Where(current => current.UserId == userId && current.IsActive == true).ToList();
+            List<ActivationCode> activationCodes = db.ActivationCodes.Where(current => current.UserId == userId && current.IsActive == true).ToList();
 
             foreach (ActivationCode activationCode in activationCodes)
             {
@@ -372,46 +372,50 @@ namespace Artebello.Controllers
             {
                 Order order = new Order();
 
+
+                int expiredNum = 0;
+                Guid? cityId = null;
+
+                if (!string.IsNullOrEmpty(city) && city != "0")
+                    cityId = new Guid(city);
+
+                order.Id = Guid.NewGuid();
+                order.IsActive = true;
+                order.IsDeleted = false;
+                order.IsPaid = false;
+                order.CreationDate = DateTime.Now;
+                order.LastModifiedDate = DateTime.Now;
+                order.Code = FindeLastOrderCode() + 1;
+                order.UserId = userid;
+                order.Description = note;
+                order.Email = email;
+                order.CityId = cityId;
+                order.Address = address;
+                order.PostalCode = postal;
+
+                decimal subtotal = GetSubtotal(products);
+
+                order.Amount = subtotal;
+
+                order.DiscountAmount = GetDiscount();
+
+                order.TotalAmount = Convert.ToDecimal(subtotal - order.DiscountAmount);
+
+
+                db.Orders.Add(order);
+                db.SaveChanges();
                 foreach (ProductInCart product in products)
                 {
-                    int expiredNum = 0;
-                    Guid? cityId = null;
-
-                    if (!string.IsNullOrEmpty(city) && city != "0")
-                        cityId = new Guid(city);
-
-                    order.Id = Guid.NewGuid();
-                    order.IsActive = true;
-                    order.IsDeleted = false;
-                    order.IsPaid = false;
-                    order.CreationDate = DateTime.Now;
-                    order.LastModifiedDate = DateTime.Now;
-                    order.Code = FindeLastOrderCode() + 1;
-                    order.UserId = userid;
-                    order.Description = note;
-                    order.Email = email;
-                    order.CityId = cityId;
-                    order.Address = address;
-                    order.PostalCode = postal;
-
-                    decimal subtotal = GetSubtotal(products);
-
-                    order.Amount = subtotal;
-
-                    order.DiscountAmount = GetDiscount();
-
-                    order.TotalAmount = Convert.ToDecimal(subtotal - order.DiscountAmount);
-
-
-                    db.Orders.Add(order);
-                    db.SaveChanges();
-
-
+                    decimal amount = product.Product.Amount;
+                    if (product.Product.IsInPromotion && product.Product.DiscountAmount != null)
+                    {
+                        amount = product.Product.DiscountAmount.Value;
+                    }
                     OrderDetail orderDetail = new OrderDetail()
                     {
                         ProductId = product.Product.Id,
                         Quantity = product.Quantity,
-                        RawAmount = product.Product.Amount * product.Quantity,
+                        RawAmount = amount * product.Quantity,
                         IsDeleted = false,
                         IsActive = true,
                         CreationDate = DateTime.Now,
@@ -422,7 +426,7 @@ namespace Artebello.Controllers
 
                     db.OrderDetails.Add(orderDetail);
                     db.SaveChanges();
-                
+
                 }
                 return order;
 
@@ -449,7 +453,7 @@ namespace Artebello.Controllers
 
             if (!discount.IsMultiUsing)
             {
-                 
+
             }
 
             if (discount.ExpireDate < DateTime.Today)
@@ -621,7 +625,7 @@ namespace Artebello.Controllers
             else
                 return null;
         }
-   
+
         private String MerchantId = "3f5c16a0-7fe8-11e9-a12a-000c29344814";
 
         [Route("callback")]
@@ -662,7 +666,7 @@ namespace Artebello.Controllers
                             callBack.RefrenceId = verificationResponse.RefID;
 
                             callBack.OrderDetails = db.OrderDetails
-                                .Where(c => c.OrderId == order.Id && c.IsDeleted == false).Include(c=>c.Product).ToList();
+                                .Where(c => c.OrderId == order.Id && c.IsDeleted == false).Include(c => c.Product).ToList();
                             foreach (OrderDetail orderDetail in callBack.OrderDetails)
                             {
                                 Product product = orderDetail.Product;
@@ -863,7 +867,22 @@ namespace Artebello.Controllers
         //    return body;
         //}
 
-
+        public ActionResult FillCities(string id)
+        {
+            Guid provinceId = new Guid(id);
+            //   ViewBag.cityId = ReturnCities(provinceId);
+            var cities = db.Cities.Where(c => c.ProvinceId == provinceId).OrderBy(current => current.Title).ToList();
+            List<CityItemViewModel> cityItems = new List<CityItemViewModel>();
+            foreach (Models.City city in cities)
+            {
+                cityItems.Add(new CityItemViewModel()
+                {
+                    Text = city.Title,
+                    Value = city.Id.ToString()
+                });
+            }
+            return Json(cityItems, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

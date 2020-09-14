@@ -61,7 +61,11 @@ function FinalizeOrder() {
     var activationCode = $('#txtActivationCode').val();
     var cellNumber = $('#txtCellNum').val();
     var email = $('#email').val();
-    var city = $('#city').val();
+
+    var e = document.getElementById("ddlCity");
+    var city = e.options[e.selectedIndex].value;
+
+    //var city = $('#city').val();
     var address = $('#address').val();
     var postal = $('#postal').val();
 
@@ -288,4 +292,33 @@ function checkUserOtp() {
         $('#error-box-otp').html('کد فعال سازی را وارد کنید');
         AppearButton('btn-checkOtp', 'activation-loading-box');
     }
+}
+
+function FillCities()
+{
+    var e = document.getElementById("ddlProvince");
+    var SelectedValue = e.options[e.selectedIndex].value;
+     //var SelectedValue = $(this).val();
+     if (SelectedValue !== "") {
+         var procemessage = "<option value='0'> صبرکنید...</option>";
+         $("#ddlCity").html(procemessage).show();
+         $.ajax(
+             {
+                 url: "/Shop/FillCities",
+                 data: { id: SelectedValue },
+                 cache: false,
+                 type: "POST",
+                 success: function (data) {
+                     var markup = "<option value='0'>انتخاب شهر</option>";
+                     for (var x = 0; x < data.length; x++) {
+                         markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                     }
+                     $("#ddlCity").html(markup).show();
+                 },
+                 error: function (reponse) {
+                     alert("error : " + reponse);
+                 }
+             });
+     }
+       
 }

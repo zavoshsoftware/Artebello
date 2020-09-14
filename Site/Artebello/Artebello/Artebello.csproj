@@ -1142,6 +1142,7 @@
     <Compile Include="ViewModels\BlogListViewModel.cs" />
     <Compile Include="ViewModels\CallBackViewModel.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
+    <Compile Include="ViewModels\CityItemViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />

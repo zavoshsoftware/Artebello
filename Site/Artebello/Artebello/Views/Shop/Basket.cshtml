@@ -5,203 +5,212 @@
 }
 
 <section class="page_breadcrumbs ls ms section_padding_bottom_15 section_padding_top_75" style="background-image: url('@ViewBag.HeaderImage');">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12 text-center">
-				<div class="heading text-center bottom_border">
-					<p class="text-uppercase josefin grey fontsize_20">سبد خرید</p>
-					<h1 class="section_header topmargin_5">سبد خرید</h1>
-				</div>
-				<ol class="breadcrumb">
-					<li>
-						<a href="./">
-							خانه
-						</a>
-					</li>
-					<li>
-						<a href="#">فروشگاه</a>
-					</li>
-					<li class="active"> سبد خرید</li>
-				</ol>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="heading text-center bottom_border">
+                    <p class="text-uppercase josefin grey fontsize_20">سبد خرید</p>
+                    <h1 class="section_header topmargin_5">سبد خرید</h1>
+                </div>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="/">
+                            خانه
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">فروشگاه</a>
+                    </li>
+                    <li class="active"> سبد خرید</li>
+                </ol>
+            </div>
+        </div>
+    </div>
 </section>
 
 
 <section class="ls section_padding_top_100 section_padding_bottom_75">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-				<div class="table-responsive">
-					<table class="table cart-table topmargin_0 tbl-basket">
-						<thead>
-							<tr>
-								<td class="product-info">محصول</td>
-								<td class="product-price-td">قیمت</td>
-								<td class="product-quantity">تعداد</td>
-								<td class="product-subtotal">جمع کل</td>
-								<td class="product-remove">&nbsp;</td>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach (var product in Model.Products)
-							{
-									<tr class="cart_item">
-										<td class="product-info">
-											<div class="media">
-												<div class="media-right">
-													<a href="product-right.html">
-														<img class="media-object cart-product-image" src="@product.Product.ImageUrl" alt="@product.Product.Title">
-													</a>
-												</div>
-												<div class="media-body">
-													<h4 class="media-heading">
-														<a href="product-right.html">@product.Product.Title</a>
-													</h4>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+                <div class="table-responsive">
+                    <table class="table cart-table topmargin_0 tbl-basket">
+                        <thead>
+                            <tr>
+                                <td class="product-info">محصول</td>
+                                <td class="product-price-td">قیمت</td>
+                                <td class="product-quantity">تعداد</td>
+                                <td class="product-subtotal">جمع کل</td>
+                                <td class="product-remove">&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var product in Model.Products)
+                            {
+                                <tr class="cart_item">
+                                    <td class="product-info">
+                                        <div class="media">
+                                            <div class="media-right">
+                                                <a href="product-right.html">
+                                                    <img class="media-object cart-product-image" src="@product.Product.ImageUrl" alt="@product.Product.Title">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading">
+                                                    <a href="product-right.html">@product.Product.Title</a>
+                                                </h4>
 
-												</div>
-											</div>
-										</td>
-										<td class="product-price">
-											@if (product.Product.IsInPromotion == true)
-											{
-												<span class="amount">@product.Product.DiscountAmountStr</span> <text>تومان</text>
-}
-else
-{
-													<span class="amount">@product.Product.AmountStr</span>	<text>تومان</text>
-}
-										</td>
-										<td class="product-quantity">
-											<div class="quantity">
-												@product.Quantity
-											</div>
-										</td>
-										<td class="product-subtotal">
-											<span class="amount">@product.RowAmount</span>
-										</td>
-										<td class="product-remove">
-											<a href="/Basket/remove/@product.Product.Code" class="fontsize_24" title="Remove this item">
-												<i class="rt-icon2-trash"></i>
-											</a>
-										</td>
-									</tr>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="product-price">
+                                        @if (product.Product.IsInPromotion == true)
+                                        {
+                                            <span class="amount">@product.Product.DiscountAmountStr</span> <text>تومان</text>
+                                        }
+                                        else
+                                        {
+                                            <span class="amount">@product.Product.AmountStr</span>	<text>تومان</text>
+                                        }
+                                    </td>
+                                    <td class="product-quantity">
+                                        <div class="quantity">
+                                            @product.Quantity
+                                        </div>
+                                    </td>
+                                    <td class="product-subtotal">
+                                        <span class="amount">@product.RowAmount</span>
+                                    </td>
+                                    <td class="product-remove">
+                                        <a href="/Basket/remove/@product.Product.Code" class="fontsize_24" title="Remove this item">
+                                            <i class="rt-icon2-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
 
-							}
+                            }
 
-						</tbody>
-					</table>
-				</div>
-		
-
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="cart-collaterals">
-							<div class="cart_totals">
-								<h4>جمع کل</h4>
-								<table class="table tbl-chk">
-									<tbody>
-									<tr class="cart-subtotal">
-										<td>جمع خرید</td>
-										<td>
-											<span class="currencies">تومان</span>
-											<span class="amount">@Model.SubTotal</span>
-										</td>
-									</tr>
-									<tr class="shipping">
-										<td>تخفیفات</td>
-										<td>
-											<span class="currencies">تومان</span>
-											<span class="amount">@Model.DiscountAmount</span>
-										</td>
-									</tr>
-									<tr class="order-total">
-										<td class="grey">مبلغ قابل پرداخت</td>
-										<td>
-											<strong class="grey">
-												<span class="currencies">تومان</span>
-												<span class="amount">@Model.Total</span>
-											</strong>
-										</td>
-									</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="coupon with_padding muted_background">
-							<h3 class="topmargin_0">کد تخفیف</h3>
-							<p>اگر کد تخفیفی دارید در باکس زیر وارد نمایید</p>
-							<div class="form-group">
-								<label class="sr-only" for="coupon">کد تخفیف:</label>
-								<input type="text" name="coupon_code" class="form-control" id="coupon" value="" placeholder="کد تخفیف">
-							</div>
-							<div class="alert alert-danger" id="errorDiv"></div>
-							<div class="alert alert-success" id="SuccessDiv">کد تخفیف وارد شده با موفقیت ثبت شد.</div>
-							<button type="button" class="theme_button" onclick="addDiscountCode();">ثبت کد</button>
-						</div>
-					</div>
-					</div>
-				<div class="row">
-			
-					<div class="col-sm-12">
-						<div class="shipping-calculator-form with_padding muted_background">
-							<div class="register">
-								<h3 class="topmargin_0">نهایی کردن خرید</h3>
-								<p>حهت تکمیل خرید و پرداخت سفارش فرم زیر را تکمیل نمایید</p>
+                        </tbody>
+                    </table>
+                </div>
 
 
-								<div class="form-group">
-									<input type="text" class="form-control" value="" placeholder="نام و نام خانوادگی" name="txtFullName" id="txtFullName">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" value="" placeholder="شماره تلفن همراه" name="txtCellNum" id="txtCellNum">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" value="" placeholder="ایمیل" name="email" id="email">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" value="" placeholder="شهر" name="city" id="city">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" value="" placeholder="آدرس" name="address" id="address">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" value="" placeholder="کد پستی" name="postal" id="postal">
-								</div>
-								<div class="form-group">
-									<textarea type="text" class="form-control" value="" placeholder="توضیحات" name="orderNotes" id="orderNotes"></textarea>
-								</div>
-								<div class="alert alert-danger" id="error-box"></div>
-								<div>
-									<button type="button" name="calc_shipping" onclick="registerUser();" class="theme_button" value="1">تکمیل سفارش و پرداخت</button>
-								</div>
-							</div>
-							
-							<div class="activate">
-								<h3 class="topmargin_0">تایید تلفن همراه</h3>
-								<p>کد ارسال شده به شماره موبایل خود را وارد نمایید</p>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="cart-collaterals">
+                            <div class="cart_totals">
+                                <h4>جمع کل</h4>
+                                <table class="table tbl-chk">
+                                    <tbody>
+                                        <tr class="cart-subtotal">
+                                            <td>جمع خرید</td>
+                                            <td>
+                                                <span class="currencies">تومان</span>
+                                                <span class="amount">@Model.SubTotal</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="shipping">
+                                            <td>تخفیفات</td>
+                                            <td>
+                                                <span class="currencies">تومان</span>
+                                                <span class="amount">@Model.DiscountAmount</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="order-total">
+                                            <td class="grey">مبلغ قابل پرداخت</td>
+                                            <td>
+                                                <strong class="grey">
+                                                    <span class="currencies">تومان</span>
+                                                    <span class="amount">@Model.Total</span>
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="coupon with_padding muted_background">
+                            <h3 class="topmargin_0">کد تخفیف</h3>
+                            <p>اگر کد تخفیفی دارید در باکس زیر وارد نمایید</p>
+                            <div class="form-group">
+                                <label class="sr-only" for="coupon">کد تخفیف:</label>
+                                <input type="text" name="coupon_code" class="form-control" id="coupon" value="" placeholder="کد تخفیف">
+                            </div>
+                            <div class="alert alert-danger" id="errorDiv"></div>
+                            <div class="alert alert-success" id="SuccessDiv">کد تخفیف وارد شده با موفقیت ثبت شد.</div>
+                            <button type="button" class="theme_button" onclick="addDiscountCode();">ثبت کد</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-sm-12">
+                        <div class="shipping-calculator-form with_padding muted_background">
+                            <div class="register">
+                                <h3 class="topmargin_0">نهایی کردن خرید</h3>
+                                <p>حهت تکمیل خرید و پرداخت سفارش فرم زیر را تکمیل نمایید</p>
 
 
-								<div class="form-group">
-									<input type="text" class="form-control" value="" placeholder="کد تایید" name="txtActivationCode" id="txtActivationCode">
-								</div>
-								<div class="alert alert-danger" id="error-box2"></div>
-							 
-								<div>
-									<button type="button" name="calc_shipping" onclick="FinalizeOrder();" class="theme_button" value="1">تکمیل سفارش و پرداخت</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" value="" placeholder="نام و نام خانوادگی" name="txtFullName" id="txtFullName">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" value="" placeholder="شماره تلفن همراه" name="txtCellNum" id="txtCellNum">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" value="" placeholder="ایمیل" name="email" id="email">
+                                </div>
+                                <div class="form-group">
+                                    <select id="ddlProvince" name="province" class="form-control" onchange="FillCities();">
+                                        <option value="0">--استان را انتخاب نمایید--</option>
+                                        @foreach (var province in Model.Provinces)
+                                        {
+                                            <option value="@province.Id">@province.Title</option>
+
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select id="ddlCity" name="city" class="form-control"></select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" value="" placeholder="آدرس" name="address" id="address">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" value="" placeholder="کد پستی" name="postal" id="postal">
+                                </div>
+                                <div class="form-group">
+                                    <textarea type="text" class="form-control" value="" placeholder="توضیحات" name="orderNotes" id="orderNotes"></textarea>
+                                </div>
+                                <div class="alert alert-danger" id="error-box"></div>
+                                <div>
+                                    <button type="button" name="calc_shipping" onclick="registerUser();" class="theme_button" value="1">تکمیل سفارش و پرداخت</button>
+                                </div>
+                            </div>
+
+                            <div class="activate">
+                                <h3 class="topmargin_0">تایید تلفن همراه</h3>
+                                <p>کد ارسال شده به شماره موبایل خود را وارد نمایید</p>
 
 
-		</div>
-		</div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" value="" placeholder="کد تایید" name="txtActivationCode" id="txtActivationCode">
+                                </div>
+                                <div class="alert alert-danger" id="error-box2"></div>
+
+                                <div>
+                                    <button type="button" name="calc_shipping" onclick="FinalizeOrder();" class="theme_button" value="1">تکمیل سفارش و پرداخت</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
 
 </section>
-
