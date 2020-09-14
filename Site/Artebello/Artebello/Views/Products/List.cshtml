@@ -38,11 +38,10 @@
                     <form class="form-inline dirrtl">
                         <div class="form-group">
                             <label class="grey" for="orderby">مرتب سازی بر اساس:</label>
-                            <select class="form-control orderby" name="orderby" id="orderby">
-                                <option value="menu_order" selected>پیش فرض</option>
-                                <option value="popularity">قیمت</option>
-                                <option value="rating">جدیدترین</option>
-                                <option value="date">پرطرفدار ترین</option>
+                            <select class="form-control orderby" name="orderby" id="orderby" onchange="ChangeOrderby();">
+                                <option value="0" selected>پیش فرض</option>
+                                <option value="1">قیمت</option>
+                                <option value="2">جدیدترین</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -280,7 +279,7 @@
         var orientation = '';
         var color = '';
         var page = '';
-
+        var orderby = '';
 
         if (getCookie("range") != "") {
             range = getCookie("range");
@@ -298,7 +297,11 @@
             page = getCookie("page");
         }
 
-        window.location.href = '/category/' + '@Model.ProductGroup.UrlParam' + '?page=' + page +'&&range=' + range + '&&orientation=' + orientation + '&&color=' + color;
+        if (getCookie("orderby") != "") {
+            orderby = getCookie("orderby");
+        }
+
+        window.location.href = '/category/' + '@Model.ProductGroup.UrlParam' + '?page=' + page + '&&range=' + range + '&&orientation=' + orientation + '&&color=' + color + '&&orderby=' + orderby;
     }
 
     function getCookie(name) {
@@ -312,6 +315,14 @@
         return "";
     }
 
+        function ChangeOrderby()
+        {
+            var e = document.getElementById("orderby");
+            var order = e.options[e.selectedIndex].value;
+            if (parseInt(order) != 0) {
+                Filter("orderby", order);
+            }
+        }
     //function delete_cookie(name) {
     //    if (getCookie(name) != "") {
     //        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';

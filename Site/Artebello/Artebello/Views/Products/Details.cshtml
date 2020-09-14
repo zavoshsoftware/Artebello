@@ -110,9 +110,9 @@
 
                                     }
                                     @*else
-                                    {
-                                        <h4 class="grey text-right ">ناموجود</h4>
-                                    }*@
+                                        {
+                                            <h4 class="grey text-right ">ناموجود</h4>
+                                        }*@
                                 </li>
                             </ul>
 
@@ -296,15 +296,18 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
-                <h2 class="text-right">آثار مرتبط</h2>
-                @foreach (var item in Model.RelatedProducts)
+                @if (Model.RelatedProducts.Count() > 0)
                 {
-                    <div class="col-md-4">
-                        <a href="/product/@item.Code">
-                            <img src="@item.ImageUrl" alt="@item.Title" width="400" />
-                        </a>
-                        <p class="item-title"><a href="/product/@item.Code">@item.Title</a></p>
-                    </div>
+                    <h2 class="text-right">آثار مرتبط</h2>
+                    foreach (var item in Model.RelatedProducts)
+                    {
+                        <div class="col-md-4">
+                            <a href="/product/@item.Code">
+                                <img src="@item.ImageUrl" alt="@item.Title" width="400" />
+                            </a>
+                            <p class="item-title"><a href="/product/@item.Code">@item.Title</a></p>
+                        </div>
+                    }
                 }
             </div>
         </div>

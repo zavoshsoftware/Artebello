@@ -240,30 +240,30 @@ namespace Artebello.Controllers
         {
             var token = new Token().GetToken("773e6490afdaeccca1206490", "123qwe!@#QWE");
 
-            //var ultraFastSend = new UltraFastSend()
-            //{
-            //    Mobile = Convert.ToInt64(cellNumber),
-            //    TemplateId = 29580,
-            //    ParameterArray = new List<UltraFastParameters>()
-            //    {
-            //        new UltraFastParameters()
-            //        {
-            //            Parameter = "verifyCode" , ParameterValue = code
-            //        }
-            //    }.ToArray()
+            var ultraFastSend = new UltraFastSend()
+            {
+                Mobile = Convert.ToInt64(cellNumber),
+                TemplateId = 29580,
+                ParameterArray = new List<UltraFastParameters>()
+                {
+                    new UltraFastParameters()
+                    {
+                        Parameter = "verifyCode" , ParameterValue = code
+                    }
+                }.ToArray()
 
-            //};
+            };
 
-            //UltraFastSendRespone ultraFastSendRespone = new UltraFast().Send(token, ultraFastSend);
+            UltraFastSendRespone ultraFastSendRespone = new UltraFast().Send(token, ultraFastSend);
 
-            //if (ultraFastSendRespone.IsSuccessful)
-            //{
+            if (ultraFastSendRespone.IsSuccessful)
+            {
 
-            //}
-            //else
-            //{
+            }
+            else
+            {
 
-            //}
+            }
         }
 
 

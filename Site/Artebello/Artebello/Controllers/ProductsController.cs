@@ -194,7 +194,7 @@ namespace Artebello.Controllers
 
         [AllowAnonymous]
         [Route("category/{urlParam}")]
-        public ActionResult List(string urlParam, string page,string range,string orientation,string color)
+        public ActionResult List(string urlParam, string page,string range,string orientation,string color,string orderby)
         {
             ProductGroup productGroup =
                 db.ProductGroups.FirstOrDefault(current => current.UrlParam == urlParam && current.IsDeleted == false);
@@ -225,7 +225,21 @@ namespace Artebello.Controllers
                 filter = true;
                 products = products.Where(current => current.ProductColor.HexCode == color).ToList();
             }
-            if(filter == false)
+            if (!string.IsNullOrEmpty(orderby))
+            {
+                filter = true;
+                int order = Convert.ToInt32(orderby);
+                if(order == 1)
+                {
+                    products = products.OrderByDescending(current=>current.Amount).ToList();
+                }
+                else if(order == 2)
+                {
+                    products = products.OrderByDescending(current => current.CreationDate).ToList();
+                }
+                
+            }
+            if (filter == false)
             {
                 if (Request.Cookies["range"] != null)
                 {
@@ -242,6 +256,12 @@ namespace Artebello.Controllers
                 if (Request.Cookies["color"] != null)
                 {
                     var c = new HttpCookie("color");
+                    c.Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies.Add(c);
+                }
+                if (Request.Cookies["orderby"] != null)
+                {
+                    var c = new HttpCookie("orderby");
                     c.Expires = DateTime.Now.AddDays(-1);
                     Response.Cookies.Add(c);
                 }
@@ -293,7 +313,7 @@ namespace Artebello.Controllers
                 ProductGroup = db.ProductGroups.Where(current => current.Id == product.ProductGroupId).FirstOrDefault(),
                 ProductImages = db.ProductImages.Where(current => current.ProductId == product.Id && current.IsActive && !current.IsDeleted).OrderBy(current => current.Priority).ToList(),
                 Comments = db.ProductComments.Where(current => current.ProductId == product.Id && current.IsActive && !current.IsDeleted).ToList(),
-                RelatedProducts = db.Products.Where(current => current.SellerId == product.SellerId && current.IsDeleted == false && current.IsActive == true).Take(3).ToList()
+                RelatedProducts = db.Products.Where(current => current.SellerId == product.SellerId && current.IsDeleted == false && current.IsActive == true && current.Id != product.Id).Take(3).ToList()
             };
             
             return View(productDetail);
