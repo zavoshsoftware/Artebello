@@ -11,36 +11,36 @@
         <ul class="slides">
             @foreach (var slide in Model.Sliders)
             {
-            <li class="">
-                <img src="@slide.ImageUrl" alt="">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 text-center text-md-right">
-                            <div class="slide_description_wrapper">
-                                <div class="slide_description text-center">
-                                    <div class="heading text-center bottom_border bottommargin_25">
-                                        <p class="text-uppercase josefin grey">@slide.Title</p>
-                                        <h1 class="text-uppercase topmargin_0">@slide.SecondTitle</h1>
+                <li class="">
+                    <img src="@slide.ImageUrl" alt="">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 text-center text-md-right">
+                                <div class="slide_description_wrapper">
+                                    <div class="slide_description text-center">
+                                        <div class="heading text-center bottom_border bottommargin_25">
+                                            <p class="text-uppercase josefin grey">@slide.Title</p>
+                                            <h1 class="text-uppercase topmargin_0">@slide.SecondTitle</h1>
+                                        </div>
+                                        <p class="bottommargin_40">
+                                            @Html.Raw(slide.Body)
+                                        </p>
+                                        <a href="@slide.LinkDestination" class="theme_button margin_0">@slide.LinkTitle</a>
                                     </div>
-                                    <p class="bottommargin_40">
-                                        @Html.Raw(slide.Body)
-                                    </p>
-                                    <a href="@slide.LinkDestination" class="theme_button margin_0">@slide.LinkTitle</a>
                                 </div>
+                                <!-- eof .slide_description_wrapper -->
                             </div>
-                            <!-- eof .slide_description_wrapper -->
+                            <!-- eof .col-* -->
                         </div>
-                        <!-- eof .col-* -->
+                        <!-- eof .row -->
                     </div>
-                    <!-- eof .row -->
-                </div>
-                <!-- eof .container -->
-                <div class="slide_social">
-                    <a href="#" class="social-icon monochrome-icon rounded-icon soc-facebook"></a>
-                    <a href="#" class="social-icon monochrome-icon rounded-icon soc-twitter"></a>
-                    <a href="#" class="social-icon monochrome-icon rounded-icon soc-instagram"></a>
-                </div>
-            </li>
+                    <!-- eof .container -->
+                    <div class="slide_social">
+                        <a href="#" class="social-icon monochrome-icon rounded-icon soc-facebook"></a>
+                        <a href="#" class="social-icon monochrome-icon rounded-icon soc-twitter"></a>
+                        <a href="#" class="social-icon monochrome-icon rounded-icon soc-instagram"></a>
+                    </div>
+                </li>
             }
         </ul>
     </div>
@@ -70,7 +70,7 @@
                                     <a href="/category/@product.UrlParam">
                                         <img src="@product.ImageUrl" alt="">
                                     </a>
-                                    
+
                                 </div>
                                 <h3>
                                     <a href="/category/@product.UrlParam">@product.Title</a>
@@ -149,16 +149,23 @@
                                 <div class="item-media borderd-media">
                                     <a href="/product/@product.Code">
                                         <img src="@product.ImageUrl" alt="">
+                                        @if (!product.IsAvailable || product.Quantity == 0)
+                                        {
+                                            <span class="newproduct">ناموجود</span>
+                                        }
                                         @*<span class="newproduct">New</span>*@
                                     </a>
-                                    <div class="product-buttons">
-                                        @*<a href="#" rel="nofollow" class="favorite_button">
-                                            <i class="rt-icon2-heart"></i>
-                                        </a>*@
-                                        <a href="#" rel="nofollow" class="add_to_cart_button" onclick="addToBasket(@product.Code,1);">
-                                            <i class="rt-icon2-basket"></i>
-                                        </a>
-                                    </div>
+                                    @if (product.IsAvailable && product.Quantity > 0)
+                                    {
+                                        <div class="product-buttons">
+                                            @*<a href="#" rel="nofollow" class="favorite_button">
+                                                    <i class="rt-icon2-heart"></i>
+                                                </a>*@
+                                            <a href="#" rel="nofollow" class="add_to_cart_button" onclick="addToBasket(@product.Code,1);">
+                                                <i class="rt-icon2-basket"></i>
+                                            </a>
+                                        </div>
+                                    }
                                 </div>
                                 <h3>
                                     <a href="/product/@product.Code">@product.Title</a>
@@ -211,7 +218,7 @@
                 <p class="darklinks topmargin_40">
                     <a href="@Model.MiddelLink.Summery" class="theme_link bottommargin_30">
                         <i class="fa fa-plus" aria-hidden="true"></i>
-                       @Model.MiddelLink.Title
+                        @Model.MiddelLink.Title
 
                     </a>
                 </p>
@@ -248,18 +255,18 @@
                                 </h3>
                                 <p class="fontsize_18">تاریخ عضویت @seller.StartDate</p>
                                 @*<div class="item-meta">
-                                    <div>
-                                        <span class="bold">تعداد کل آثار</span>
-                                        <br>
-                                        <span>@seller.Products.Count()</span>
-                                    </div>
-                                    <div>
-                                        <span class="bold">تعداد آثار فروش رفته</span>
-                                        <br>
-                                        <span>79</span>
-                                    </div>
+                                        <div>
+                                            <span class="bold">تعداد کل آثار</span>
+                                            <br>
+                                            <span>@seller.Products.Count()</span>
+                                        </div>
+                                        <div>
+                                            <span class="bold">تعداد آثار فروش رفته</span>
+                                            <br>
+                                            <span>79</span>
+                                        </div>
 
-                                </div>*@
+                                    </div>*@
                                 <div class="ds item-social darklinks">
                                     <div>
                                         @*<a href="#" class="social-icon soc-facebook"></a>*@

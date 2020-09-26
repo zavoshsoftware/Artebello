@@ -30,9 +30,17 @@ namespace Artebello.Controllers
         [HttpPost]
         public ActionResult AddToCart(string code, string qty)
         {
-            SetCookie(code, qty);
-            ViewBag.HeaderImage = db.Texts.Where(x => x.TextType.Name == "shoppingimage").FirstOrDefault().ImageUrl;
-            return Json("true", JsonRequestBehavior.AllowGet);
+            int productCode = Convert.ToInt32(code);
+            int productQuantity = Convert.ToInt32(qty);
+            Product product = db.Products.Where(current => current.Code == productCode).FirstOrDefault();
+            if(product.IsAvailable && product.Quantity >= productQuantity)
+            {
+                SetCookie(code, qty);
+                ViewBag.HeaderImage = db.Texts.Where(x => x.TextType.Name == "shoppingimage").FirstOrDefault().ImageUrl;
+                return Json("true", JsonRequestBehavior.AllowGet);
+            }
+            
+            return Json("false", JsonRequestBehavior.AllowGet);
         }
 
 
@@ -502,7 +510,7 @@ namespace Artebello.Controllers
             foreach (ProductInCart orderDetail in orderDetails)
             {
                 decimal amount = orderDetail.Product.Amount;
-                if (orderDetail.Product.IsInPromotion)
+                if (orderDetail.Product.IsInPromotion && !string.IsNullOrEmpty(orderDetail.Product.DiscountAmount.ToString()))
                     amount = orderDetail.Product.DiscountAmount.Value;
 
                 subTotal = subTotal + (amount * orderDetail.Quantity);
@@ -637,6 +645,13 @@ namespace Artebello.Controllers
             if (Status != "OK")
             {
                 callBack.IsSuccess = false;
+                callBack.RefrenceId = "414";
+                Order order = GetOrderByAuthority(authority);
+                if (order != null)
+                {
+                    callBack.OrderDetails = db.OrderDetails
+                                .Where(c => c.OrderId == order.Id && c.IsDeleted == false).Include(c => c.Product).ToList();
+                }
             }
 
             else
@@ -671,6 +686,10 @@ namespace Artebello.Controllers
                             {
                                 Product product = orderDetail.Product;
                                 product.Quantity = orderDetail.Product.Quantity - 1;
+                                if (product.Quantity == 0)
+                                {
+                                    product.IsAvailable = false;
+                                }
                                 db.SaveChanges();
                             }
                         }

@@ -7,8 +7,17 @@ function addToBasket(code, qty) {
             data: { code: code, qty: qty },
             type: "Post"
         }).done(function (result) {
-       
-            window.location = "/basket";
+            //window.location = "/basket";
+            if (result === "true")
+            {
+                window.location = "/basket";
+            }
+            else
+            {
+                alert('موجودی محصول کافی نیست');
+            }
+
+            
         });
 }
 

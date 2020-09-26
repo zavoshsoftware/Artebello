@@ -65,12 +65,12 @@
                                             <div class="item-media borderd-media">
                                                 <a href="/product/@product.Code">
                                                     <img src="@product.ImageUrl" alt="" />
-                                                    @if (!product.IsAvailable)
+                                                    @if (!product.IsAvailable || product.Quantity == 0)
                                                     {
                                                         <span class="newproduct">ناموجود</span>
                                                     }
                                                 </a>
-                                                @if (product.IsAvailable)
+                                                @if (product.IsAvailable && product.Quantity > 0)
                                                 {
                                                     <div class="product-buttons">
                                                         @*<a href="#" rel="nofollow" class="favorite_button">

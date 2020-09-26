@@ -41,7 +41,7 @@
                         <a href="@Model.Product.ImageUrl" itemprop="image" class="main-image zoom" title="" data-gal="prettyPhoto[product-gallery]">
 
                             <img src="@Model.Product.ImageUrl" class="attachment-shop_single wp-post-image" alt="" title="">
-                            @if (!Model.Product.IsAvailable)
+                            @if (!Model.Product.IsAvailable || Model.Product.Quantity == 0)
                             {
                                 <span class="newproduct">ناموجود</span>
                             }
@@ -94,7 +94,7 @@
 
                             <ul class="list1 no-bullets">
                                 <li>
-                                    @if (Model.Product.IsAvailable)
+                                    @if (Model.Product.IsAvailable && Model.Product.Quantity > 0)
                                     {
                                         <p class="price">
                                             @if (Model.Product.IsInPromotion)
@@ -152,7 +152,7 @@
                                     <span>: @Model.Product.ProductTheme.Title </span>
 
                                 </div>
-                                @if (Model.Product.IsAvailable)
+                                @if (Model.Product.IsAvailable && Model.Product.Quantity > 0)
                                 {
                                     <button class="theme_button color1" type="button" onclick="addToBasket(@Model.Product.Code,1);">افزودن به سبد خرید</button>
                                 }
