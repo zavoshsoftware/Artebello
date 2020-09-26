@@ -44,12 +44,12 @@ namespace Artebello.Controllers
         // GET: SellerProducts/Create
         public ActionResult Create()
         {
-            ViewBag.ProductColorId = new SelectList(db.ProductColors, "Id", "Title");
-            ViewBag.ProductGroupId = new SelectList(db.ProductGroups, "Id", "Title");
-            ViewBag.ProductMediumId = new SelectList(db.ProductMediums, "Id", "Title");
-            ViewBag.ProductOrientationId = new SelectList(db.ProductOrientations, "Id", "Title");
-            ViewBag.ProductThemeId = new SelectList(db.ProductThemes, "Id", "Title");
-            ViewBag.ProductTypeId = new SelectList(db.ProductTypes, "Id", "Title");
+            ViewBag.ProductColorId = new SelectList(db.ProductColors.Where(current => current.IsDeleted == false), "Id", "Title");
+            ViewBag.ProductGroupId = new SelectList(db.ProductGroups.Where(current => current.IsDeleted == false), "Id", "Title");
+            ViewBag.ProductMediumId = new SelectList(db.ProductMediums.Where(current => current.IsDeleted == false), "Id", "Title");
+            ViewBag.ProductOrientationId = new SelectList(db.ProductOrientations.Where(current => current.IsDeleted == false), "Id", "Title");
+            ViewBag.ProductThemeId = new SelectList(db.ProductThemes.Where(current => current.IsDeleted == false), "Id", "Title");
+            ViewBag.ProductTypeId = new SelectList(db.ProductTypes.Where(current => current.IsDeleted == false), "Id", "Title");
             //ViewBag.SellerId = new SelectList(db.Sellers, "Id", "Title");
             return View();
         }
@@ -90,12 +90,12 @@ namespace Artebello.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProductColorId = new SelectList(db.ProductColors, "Id", "Title", product.ProductColorId);
-            ViewBag.ProductGroupId = new SelectList(db.ProductGroups, "Id", "Title", product.ProductGroupId);
-            ViewBag.ProductMediumId = new SelectList(db.ProductMediums, "Id", "Title", product.ProductMediumId);
-            ViewBag.ProductOrientationId = new SelectList(db.ProductOrientations, "Id", "Title", product.ProductOrientationId);
-            ViewBag.ProductThemeId = new SelectList(db.ProductThemes, "Id", "Title", product.ProductThemeId);
-            ViewBag.ProductTypeId = new SelectList(db.ProductTypes, "Id", "Title", product.ProductTypeId);
+            ViewBag.ProductColorId = new SelectList(db.ProductColors.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductColorId);
+            ViewBag.ProductGroupId = new SelectList(db.ProductGroups.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductGroupId);
+            ViewBag.ProductMediumId = new SelectList(db.ProductMediums.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductMediumId);
+            ViewBag.ProductOrientationId = new SelectList(db.ProductOrientations.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductOrientationId);
+            ViewBag.ProductThemeId = new SelectList(db.ProductThemes.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductThemeId);
+            ViewBag.ProductTypeId = new SelectList(db.ProductTypes.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductTypeId);
             //ViewBag.SellerId = new SelectList(db.Sellers, "Id", "Title", product.SellerId);
             return View(product);
         }
@@ -112,12 +112,12 @@ namespace Artebello.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProductColorId = new SelectList(db.ProductColors, "Id", "Title", product.ProductColorId);
-            ViewBag.ProductGroupId = new SelectList(db.ProductGroups, "Id", "Title", product.ProductGroupId);
-            ViewBag.ProductMediumId = new SelectList(db.ProductMediums, "Id", "Title", product.ProductMediumId);
-            ViewBag.ProductOrientationId = new SelectList(db.ProductOrientations, "Id", "Title", product.ProductOrientationId);
-            ViewBag.ProductThemeId = new SelectList(db.ProductThemes, "Id", "Title", product.ProductThemeId);
-            ViewBag.ProductTypeId = new SelectList(db.ProductTypes, "Id", "Title", product.ProductTypeId);
+            ViewBag.ProductColorId = new SelectList(db.ProductColors.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductColorId);
+            ViewBag.ProductGroupId = new SelectList(db.ProductGroups.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductGroupId);
+            ViewBag.ProductMediumId = new SelectList(db.ProductMediums.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductMediumId);
+            ViewBag.ProductOrientationId = new SelectList(db.ProductOrientations.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductOrientationId);
+            ViewBag.ProductThemeId = new SelectList(db.ProductThemes.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductThemeId);
+            ViewBag.ProductTypeId = new SelectList(db.ProductTypes.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductTypeId);
             //ViewBag.SellerId = new SelectList(db.Sellers, "Id", "Title", product.SellerId);
             return View(product);
         }
@@ -144,9 +144,9 @@ namespace Artebello.Controllers
                     product.ImageUrl = newFilenameUrl;
                 }
                 #endregion
-                Guid userId = new Guid(User.Identity.Name);
-                Seller seller = db.Sellers.Where(current => current.UserId == userId).FirstOrDefault();
-                product.Seller = seller;
+                //Guid userId = new Guid(User.Identity.Name);
+                //Seller seller = db.Sellers.Where(current => current.UserId == userId).FirstOrDefault();
+                //product.Seller = seller;
                 product.IsDeleted = false;
                 product.IsActive = false;
                 product.IsInHome = false;

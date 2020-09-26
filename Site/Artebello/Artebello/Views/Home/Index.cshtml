@@ -57,37 +57,38 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="columns-4">
-        <ul id="products" class="products list-unstyled grid-view">
-            @foreach (var product in Model.ProductGroups)
-            {
-                <li class="product type-product">
-                    <div class="side-item">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="item-media">
-                                    <a href="/category/@product.UrlParam">
-                                        <img src="@product.ImageUrl" alt="">
-                                    </a>
 
-                                </div>
-                                <h3>
-                                    <a href="/category/@product.UrlParam">@product.Title</a>
-                                </h3>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="item-content">
+        <div class="columns-4">
+            <ul id="products" class="products list-unstyled grid-view">
+                @foreach (var product in Model.ProductGroups)
+            {
+                    <li class="product type-product">
+                        <div class="side-item">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="item-media">
+                                        <a href="/category/@product.UrlParam">
+                                            <img src="@product.ImageUrl" alt="">
+                                        </a>
+
+                                    </div>
                                     <h3>
                                         <a href="/category/@product.UrlParam">@product.Title</a>
                                     </h3>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="item-content">
+                                        <h3>
+                                            <a href="/category/@product.UrlParam">@product.Title</a>
+                                        </h3>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-            }
-        </ul>
+                    </li>
+                }
+            </ul>
+        </div>
     </div>
 </section>
 
@@ -137,68 +138,69 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="columns-4">
-        <ul id="products" class="products list-unstyled grid-view">
-            @foreach (var product in Model.LatestProducts)
+
+        <div class="columns-4">
+            <ul id="products" class="products list-unstyled grid-view">
+                @foreach (var product in Model.LatestProducts)
             {
-                <li class="product type-product">
-                    <div class="side-item">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="item-media borderd-media">
-                                    <a href="/product/@product.Code">
-                                        <img src="@product.ImageUrl" alt="">
-                                        @if (!product.IsAvailable || product.Quantity == 0)
+                    <li class="product type-product">
+                        <div class="side-item">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="item-media borderd-media">
+                                        <a href="/product/@product.Code">
+                                            <img src="@product.ImageUrl" alt="">
+                                            @if (!product.IsAvailable || product.Quantity == 0)
+                                            {
+                                                <span class="newproduct">ناموجود</span>
+                                            }
+                                            @*<span class="newproduct">New</span>*@
+                                        </a>
+                                        @if (product.IsAvailable && product.Quantity > 0)
                                         {
-                                            <span class="newproduct">ناموجود</span>
+                                            <div class="product-buttons">
+                                                @*<a href="#" rel="nofollow" class="favorite_button">
+                                                        <i class="rt-icon2-heart"></i>
+                                                    </a>*@
+                                                <a href="#" rel="nofollow" class="add_to_cart_button" onclick="addToBasket(@product.Code,1);">
+                                                    <i class="rt-icon2-basket"></i>
+                                                </a>
+                                            </div>
                                         }
-                                        @*<span class="newproduct">New</span>*@
-                                    </a>
-                                    @if (product.IsAvailable && product.Quantity > 0)
-                                    {
-                                        <div class="product-buttons">
-                                            @*<a href="#" rel="nofollow" class="favorite_button">
-                                                    <i class="rt-icon2-heart"></i>
-                                                </a>*@
-                                            <a href="#" rel="nofollow" class="add_to_cart_button" onclick="addToBasket(@product.Code,1);">
-                                                <i class="rt-icon2-basket"></i>
-                                            </a>
-                                        </div>
-                                    }
-                                </div>
-                                <h3>
-                                    <a href="/product/@product.Code">@product.Title</a>
-                                </h3>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="item-content">
+                                    </div>
                                     <h3>
                                         <a href="/product/@product.Code">@product.Title</a>
                                     </h3>
-                                    <h4>Product Description</h4>
-                                    <p class="product-description">
-                                        @Html.Raw(product.Summery)
-                                    </p>
-                                    <h4>Product Rating</h4>
-                                    <div class="star-rating" title="Rated 4.00 out of 5">
-                                        <span style="width: 80%">
-                                            <strong class="rating">4.00</strong> out of 5
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="item-content">
+                                        <h3>
+                                            <a href="/product/@product.Code">@product.Title</a>
+                                        </h3>
+                                        <h4>Product Description</h4>
+                                        <p class="product-description">
+                                            @Html.Raw(product.Summery)
+                                        </p>
+                                        <h4>Product Rating</h4>
+                                        <div class="star-rating" title="Rated 4.00 out of 5">
+                                            <span style="width: 80%">
+                                                <strong class="rating">4.00</strong> out of 5
+                                            </span>
+                                        </div>
+                                        <span class="price">
+                                            <span>
+                                                <span class="amount">@string.Format("{0:n0}", product.Amount) تومان</span>
+                                            </span>
                                         </span>
-                                    </div>
-                                    <span class="price">
-                                        <span>
-                                            <span class="amount">@string.Format("{0:n0}", product.Amount) تومان</span>
-                                        </span>
-                                    </span>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-            }
-        </ul>
+                    </li>
+                }
+            </ul>
+        </div>
     </div>
 </section>
 <section class="ls section_padding_top_110 columns_margin_0">
