@@ -107,7 +107,7 @@ namespace Models
             }
         }
 
-        [Display(Name = "قیمت بعد از تخفیف")]
+        [Display(Name = "قیمت بعد از تخفیف(تومان)")]
         public decimal? DiscountAmount { get; set; }
 
         [Display(Name = "در حراج است؟")]

@@ -15,6 +15,7 @@ using Models;
 using Helpers;
 using SmsIrRestful;
 using System.Collections.Generic;
+using Helpers;
 
 namespace Controllers
 {
@@ -212,7 +213,7 @@ namespace Controllers
                     if (user != null)
                     {
 
-                        SendSms(cellNumber, user.Password);
+                        SendSms.SendOtpSms(cellNumber, user.Password);
 
                         return Json("true", JsonRequestBehavior.AllowGet);
                     }
@@ -266,7 +267,7 @@ namespace Controllers
                     }
                     user = CreateUser(fullName, cellNumber, roleId);
 
-                    SendSms(user.CellNum, user.Password);
+                    SendSms.SendOtpSms(user.CellNum, user.Password);
 
                     return Json("true", JsonRequestBehavior.AllowGet);
                 }
@@ -400,35 +401,7 @@ namespace Controllers
 
         }
 
-        public void SendSms(string cellNumber, string code)
-        {
-            var token = new Token().GetToken("773e6490afdaeccca1206490", "123qwe!@#QWE");
-
-            var ultraFastSend = new UltraFastSend()
-            {
-                Mobile = Convert.ToInt64(cellNumber),
-                TemplateId = 29580,
-                ParameterArray = new List<UltraFastParameters>()
-                {
-                    new UltraFastParameters()
-                    {
-                        Parameter = "verifyCode" , ParameterValue = code
-                    }
-                }.ToArray()
-
-            };
-
-            UltraFastSendRespone ultraFastSendRespone = new UltraFast().Send(token, ultraFastSend);
-
-            if (ultraFastSendRespone.IsSuccessful)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
+       
         #endregion
 
 

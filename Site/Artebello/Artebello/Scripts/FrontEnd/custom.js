@@ -331,3 +331,29 @@ function FillCities()
      }
        
 }
+
+function JoinNewsLetter() {
+    var emailVal = $("#txtEmail").val();
+    if (emailVal != "") {
+        $.ajax(
+            {
+                url: "/home/JoinNewsLetter",
+                data: { email: emailVal },
+                type: "GET"
+            }).done(function (result) {
+                if (result == "true") {
+                    document.getElementById('txtEmail').value = "";
+                    alert('عضویت شما در خبرنامه با موفقیت صورت پذیرفت');
+                }
+                else if (result == "false") {
+                    alert('خطایی رخ داد! مجددا تلاش نمایید');
+                }
+                else if (result == "InvalidEmail") {
+                    alert('ایمیل وارد شده صحیح نمی باشد! مجددا تلاش نمایید');
+                }
+            });
+    }
+    else {
+        alert('جهت عضویت در خبرنامه ایمیل خود را وارد نمایید');
+    }
+}

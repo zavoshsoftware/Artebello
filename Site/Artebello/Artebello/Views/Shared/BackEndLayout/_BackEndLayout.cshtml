@@ -142,7 +142,10 @@
                 $('.menuitem').removeClass('active');
                 $('#infoLi').addClass('active');
             }
-        
+            else if (URL.toLowerCase().includes('/newsletters')) {
+                $('.menuitem').removeClass('active');
+                $('#NewsLetterLi').addClass('active');
+            }
 
         });
     </script>

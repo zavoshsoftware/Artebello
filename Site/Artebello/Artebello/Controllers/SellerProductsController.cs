@@ -10,6 +10,7 @@ using Models;
 using System.IO;
 using Eshop.Helpers;
 using ViewModels;
+using Helpers;
 
 namespace Artebello.Controllers
 {
@@ -152,6 +153,8 @@ namespace Artebello.Controllers
                 product.IsInHome = false;
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
+                string msg = "محصول کد "+ product.Code +" در وب سایت آرتبللو ویرایش شد";
+                SendSms.SendCommonSms("09123964937", msg);
                 return RedirectToAction("Index");
             }
             ViewBag.ProductColorId = new SelectList(db.ProductColors, "Id", "Title", product.ProductColorId);
@@ -341,5 +344,7 @@ namespace Artebello.Controllers
             }
             
         }
+
+
     }
 }

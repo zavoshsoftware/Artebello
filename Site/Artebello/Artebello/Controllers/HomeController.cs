@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using ViewModels;
@@ -51,6 +52,41 @@ namespace Artebello.Controllers
             ViewBag.HeaderImage = db.Texts.Where(x => x.TextType.Name == "aboutimage").FirstOrDefault().ImageUrl;
             return View(about);
         }
-       
+
+        public ActionResult JoinNewsLetter(string email)
+        {
+            if (ModelState.IsValid)
+            {
+                bool isEmail = Regex.IsMatch(email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
+
+                if (!isEmail)
+                    return Json("InvalidEmail", JsonRequestBehavior.AllowGet);
+                else
+                {
+                    try
+                    {
+                        NewsLetter newsLetter = new NewsLetter();
+                        newsLetter.Id = Guid.NewGuid();
+                        newsLetter.Email = email;
+                        newsLetter.IsActive = true;
+                        newsLetter.IsDeleted = false;
+                        newsLetter.CreationDate = DateTime.Now;
+
+                        db.NewsLetters.Add(newsLetter);
+                        db.SaveChanges();
+
+                        return Json("true", JsonRequestBehavior.AllowGet);
+                    }
+                    catch
+                    {
+                        return Json("false", JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            else
+                return Json("false", JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

@@ -286,3 +286,7 @@ h3.entry-title, .blog-header {
             color: #fff;
         }
 }
+.pp_details .pp_social
+{
+    display:none;
+}

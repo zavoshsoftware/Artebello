@@ -649,6 +649,7 @@ namespace Artebello.Controllers
                 Order order = GetOrderByAuthority(authority);
                 if (order != null)
                 {
+                    callBack.Order = order;
                     callBack.OrderDetails = db.OrderDetails
                                 .Where(c => c.OrderId == order.Id && c.IsDeleted == false).Include(c => c.Product).ToList();
                 }
@@ -675,7 +676,7 @@ namespace Artebello.Controllers
                             order.RefId = verificationResponse.RefID;
 
                             db.SaveChanges();
-
+                            callBack.Order = order;
                             callBack.IsSuccess = true;
                             callBack.OrderCode = order.Code.ToString();
                             callBack.RefrenceId = verificationResponse.RefID;
@@ -686,6 +687,7 @@ namespace Artebello.Controllers
                             {
                                 Product product = orderDetail.Product;
                                 product.Quantity = orderDetail.Product.Quantity - 1;
+                                
                                 if (product.Quantity == 0)
                                 {
                                     product.IsAvailable = false;
