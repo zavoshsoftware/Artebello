@@ -103,8 +103,11 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var URL = window.location.pathname;
-           
-            if (URL.toLowerCase().includes('/sellerproducts')) {
+            if (URL.toLowerCase().includes('/editprofile')) {
+                $('.menuitem').removeClass('active');
+                $('#EditProfile').addClass('active');
+            }
+           else if (URL.toLowerCase().includes('/sellerproducts')) {
                 $('.menuitem').removeClass('active');
                 $('#SellerProducts').addClass('active');
             }

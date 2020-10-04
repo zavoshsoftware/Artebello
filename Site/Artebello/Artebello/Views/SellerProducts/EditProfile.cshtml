@@ -3,7 +3,7 @@
     ViewBag.Title = "ویرایش";
     Layout = "~/Views/Shared/SellerLayout/_BackEndLayout.cshtml";
 }
-<h2>@ViewBag.Title</h2>
+
 @using (Html.BeginForm("EditProfile", "SellerProducts", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -12,31 +12,42 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-info">
+            <div class="panel panel-primary">
                 <div class="panel-heading">اطلاعات هنرمند</div>
                 <div class="panel-body">
                     @Html.Raw(TempData["SizeError"])
                     <div class="form-horizontal">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Fullname, new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Fullname)
-                                @Html.ValidationMessageFor(model => model.Fullname)
+                        <div class="row">
+                            <div class="col-md-8">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Fullname, new { @class = "col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.DisplayFor(model => model.Fullname)
+                                        @Html.ValidationMessageFor(model => model.Fullname)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.BirthDate, new { @class = "col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.DisplayFor(model => model.BirthDate)
+                                        @Html.ValidationMessageFor(model => model.BirthDate)
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <p class="alert alert-info font-bold fontsize-15">
+                                    هنرمند گرامی، برای تغییر اطلاعات کاربری خود، از طریق ایمیل artist@artebello.co با ما در ارتباط باشید
+                                </p>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.BirthDate, new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.BirthDate)
-                                @Html.ValidationMessageFor(model => model.BirthDate)
-                            </div>
-                        </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.BirthLocation, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.BirthLocation)
+                                @Html.DisplayFor(model => model.BirthLocation)
                                 @Html.ValidationMessageFor(model => model.BirthLocation)
                             </div>
                         </div>
@@ -44,7 +55,8 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Gender, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownList("Gender", String.Empty)
+                               
+                                @Html.DropDownList("Gender", null,new { @disabled="disabled"})
                                 @Html.ValidationMessageFor(model => model.Gender)
                             </div>
                         </div>
@@ -52,7 +64,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Email)
+                                @Html.DisplayFor(model => model.Email)
                                 @Html.ValidationMessageFor(model => model.Email)
                             </div>
                         </div>
@@ -60,7 +72,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Password)
+                                @Html.DisplayFor(model => model.Password)
                                 @Html.ValidationMessageFor(model => model.Password)
                             </div>
                         </div>
@@ -68,7 +80,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.CellNum, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.CellNum)
+                                @Html.DisplayFor(model => model.CellNum)
                                 @Html.ValidationMessageFor(model => model.CellNum)
                             </div>
                         </div>
@@ -76,7 +88,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Phone, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Phone)
+                                @Html.DisplayFor(model => model.Phone)
                                 @Html.ValidationMessageFor(model => model.Phone)
                             </div>
                         </div>
@@ -84,7 +96,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.ZipCode, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.ZipCode)
+                                @Html.DisplayFor(model => model.ZipCode)
                                 @Html.ValidationMessageFor(model => model.ZipCode)
                             </div>
                         </div>
@@ -92,7 +104,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.CurrentProvince, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.CurrentProvince)
+                                @Html.DisplayFor(model => model.CurrentProvince)
                                 @Html.ValidationMessageFor(model => model.CurrentProvince)
                             </div>
                         </div>
@@ -100,7 +112,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Address)
+                                @Html.DisplayFor(model => model.Address)
                                 @Html.ValidationMessageFor(model => model.Address)
                             </div>
                         </div>
@@ -110,14 +122,14 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div class="panel panel-info">
+            <div class="panel panel-primary">
                 <div class="panel-heading">درباره هنرمند</div>
                 <div class="panel-body">
                     <div class="form-horizontal">
                         <div class="form-group">
                             @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Title)
+                                @Html.DisplayFor(model => model.Title)
                                 @Html.ValidationMessageFor(model => model.Title)
                             </div>
                         </div>
@@ -125,7 +137,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Education, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Education)
+                                @Html.DisplayFor(model => model.Education)
                                 @Html.ValidationMessageFor(model => model.Education)
                             </div>
                         </div>
@@ -133,25 +145,27 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.ArtField, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.ArtField)
+                                @Html.DisplayFor(model => model.ArtField)
                                 @Html.ValidationMessageFor(model => model.ArtField)
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-2">
+                                @Html.LabelFor(model => model.ParticipatingDomesticExhibitions, new { @class = "control-label" })
                             </div>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.ParticipatingDomesticExhibitions)
+                                @Html.DisplayFor(model => model.ParticipatingDomesticExhibitions)
                                 @Html.ValidationMessageFor(model => model.ParticipatingDomesticExhibitions)
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-2">
+                                @Html.LabelFor(model => model.ParticipatingForeignExhibitions, new { @class = "control-label" })
                             </div>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.ParticipatingForeignExhibitions)
+                                @Html.DisplayFor(model => model.ParticipatingForeignExhibitions)
                                 @Html.ValidationMessageFor(model => model.ParticipatingForeignExhibitions)
                             </div>
                         </div>
@@ -159,7 +173,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Summery, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Summery)
+                                @Html.DisplayFor(model => model.Summery)
                                 @Html.ValidationMessageFor(model => model.Summery)
                             </div>
                         </div>
@@ -167,12 +181,26 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.MethodOfIntroduction, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.MethodOfIntroduction)
+                                @Html.DisplayFor(model => model.MethodOfIntroduction)
                                 @Html.ValidationMessageFor(model => model.MethodOfIntroduction)
                             </div>
                         </div>
-
                         <div class="form-group">
+                            @Html.LabelFor(model => model.ImageUrl, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                               <img src="@Model.ImageUrl" width="100"/>
+                            </div>
+                        </div>
+                        @if (!string.IsNullOrEmpty(Model.ResumeUrl))
+                        {
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ResumeUrl, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <a href="@Model.ResumeUrl" class="btn btn-info" target="_blank">دانلود فایل رزومه</a>
+                                </div>
+                            </div>
+                        }
+                        @*<div class="form-group">
                             @Html.LabelFor(model => model.ImageUrl, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.Kendo().Upload().Name("fileupload").Multiple(false)
@@ -190,13 +218,13 @@
                                 @Html.ValidationMessageFor(model => model.ResumeUrl)
                                 <dfn>حداکثر سایز فایل 4 مگابایت می باشد</dfn>
                             </div>
-                        </div>
+                        </div>*@
 
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.StartDate, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.StartDate)
+                                @Html.DisplayFor(model => model.StartDate)
                                 @Html.ValidationMessageFor(model => model.StartDate)
                             </div>
                         </div>
@@ -204,7 +232,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Body, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Body)
+                                @Html.DisplayFor(model => model.Body)
                                 @Html.ValidationMessageFor(model => model.Body)
                             </div>
                         </div>
@@ -212,8 +240,8 @@
 
                         <div class="form-group" id="buttons">
                             <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="ثبت" class="btn btn-primary" />
-                                @Html.ActionLink("بازگشت به فهرست", "Index")
+                                @*<input type="submit" value="ثبت" class="btn btn-primary" />*@
+                                @Html.ActionLink("بازگشت به فهرست", "Index",null,new { @class="btn btn-warning"})
                             </div>
                         </div>
                     </div>
