@@ -2,7 +2,7 @@
 
 @{
     Layout = "~/Views/Shared/FrontEndLayout/_FronEndLayout.cshtml";
-    ViewBag.Title = "محصولات | " + Model.ProductGroup.Title + " | ";
+    ViewBag.Title = "آثار | " + Model.ProductGroup.Title + " | ";
 }
 
 
@@ -12,17 +12,17 @@
         <div class="row">
             <div class="col-sm-12 text-center">
                 <div class="heading text-center bottom_border">
-                    <p class="text-uppercase josefin grey fontsize_20">محصولات</p>
+                    <p class="text-uppercase josefin grey fontsize_20">آثار</p>
                     <h1 class="section_header topmargin_5">@Model.ProductGroup.Title</h1>
                 </div>
                 <ol class="breadcrumb dirrtl">
                     <li>
-                        <a href="./">
+                        <a href="/">
                             خانه
                         </a>
                     </li>
                     <li>
-                        <a href="/category">محصولات</a>
+                        <a href="/category">آثار</a>
                     </li>
                     <li class="active">@Model.ProductGroup.Title</li>
                 </ol>
@@ -38,11 +38,10 @@
                     <form class="form-inline dirrtl">
                         <div class="form-group">
                             <label class="grey" for="orderby">مرتب سازی بر اساس:</label>
-                            <select class="form-control orderby" name="orderby" id="orderby">
-                                <option value="menu_order" selected>پیش فرض</option>
-                                <option value="popularity">قیمت</option>
-                                <option value="rating">جدیدترین</option>
-                                <option value="date">پرطرفدار ترین</option>
+                            <select class="form-control orderby" name="orderby" id="orderby" onchange="ChangeOrderby();">
+                                <option value="0" selected>پیش فرض</option>
+                                <option value="1">قیمت</option>
+                                <option value="2">جدیدترین</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -66,19 +65,22 @@
                                             <div class="item-media borderd-media">
                                                 <a href="/product/@product.Code">
                                                     <img src="@product.ImageUrl" alt="" />
-                                                    @if (product.Quantity == 0)
+                                                    @if (!product.IsAvailable || product.Quantity == 0)
                                                     {
                                                         <span class="newproduct">ناموجود</span>
                                                     }
                                                 </a>
-                                                <div class="product-buttons">
-                                                    <a href="#" rel="nofollow" class="favorite_button">
-                                                        <i class="rt-icon2-heart"></i>
-                                                    </a>
-                                                    <a href="#" rel="nofollow" class="add_to_cart_button">
-                                                        <i class="rt-icon2-basket"></i>
-                                                    </a>
-                                                </div>
+                                                @if (product.IsAvailable && product.Quantity > 0)
+                                                {
+                                                    <div class="product-buttons">
+                                                        @*<a href="#" rel="nofollow" class="favorite_button">
+                                                            <i class="rt-icon2-heart"></i>
+                                                        </a>*@
+                                                        <a href="#" rel="nofollow" class="add_to_cart_button"  onclick="addToBasket(@product.Code,1);">
+                                                            <i class="rt-icon2-basket"></i>
+                                                        </a>
+                                                    </div>
+                                                }
                                             </div>
                                             <h3>
                                                 <a href="/product/@product.Code">@product.Title</a>
@@ -124,7 +126,7 @@
                 <div class="row">
                     <div class="col-sm-12 text-center">
                         <ul class="pagination small with_background">
-                            <li >
+                            <li>
                                 <a href="#"></a>
                             </li>
                             <li class="active" id="pagenum_1">
@@ -228,7 +230,7 @@
                 <div class="with_background">
                     <div class="widget widget_layered_nav widget_categories">
                         <div class="widget-title">
-                            <h3>سایر گروه محصولات</h3>
+                            <h3>سایر گروه آثار</h3>
                         </div>
                         <ul class="list-unstyled greylinks dirrtl">
                             @foreach (var item in Model.SidebarProductGroups)
@@ -277,7 +279,7 @@
         var orientation = '';
         var color = '';
         var page = '';
-
+        var orderby = '';
 
         if (getCookie("range") != "") {
             range = getCookie("range");
@@ -295,7 +297,11 @@
             page = getCookie("page");
         }
 
-        window.location.href = '/category/' + '@Model.ProductGroup.UrlParam' + '?page=' + page +'&&range=' + range + '&&orientation=' + orientation + '&&color=' + color;
+        if (getCookie("orderby") != "") {
+            orderby = getCookie("orderby");
+        }
+
+        window.location.href = '/category/' + '@Model.ProductGroup.UrlParam' + '?page=' + page + '&&range=' + range + '&&orientation=' + orientation + '&&color=' + color + '&&orderby=' + orderby;
     }
 
     function getCookie(name) {
@@ -309,6 +315,14 @@
         return "";
     }
 
+        function ChangeOrderby()
+        {
+            var e = document.getElementById("orderby");
+            var order = e.options[e.selectedIndex].value;
+            if (parseInt(order) != 0) {
+                Filter("orderby", order);
+            }
+        }
     //function delete_cookie(name) {
     //    if (getCookie(name) != "") {
     //        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';

@@ -35,6 +35,7 @@ namespace Models
         public DbSet<ActivationCode> ActivationCodes { get; set; }
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<TextType> TextType { get; set; }
+        public DbSet<NewsLetter> NewsLetters { get; set; }
 
 
 

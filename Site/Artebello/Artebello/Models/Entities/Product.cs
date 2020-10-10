@@ -23,12 +23,12 @@ namespace Models
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
         public int Code { get; set; }
 
-        
+
         [Display(Name = "Title", ResourceType = typeof(Resources.Models.Product))]
         [StringLength(250, ErrorMessage = "طول {0} نباید بیشتر از {1} باشد")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
         public string Title { get; set; }
-        
+
         [Display(Name = "Amount", ResourceType = typeof(Resources.Models.Product))]
         [Column(TypeName = "Money")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
@@ -58,15 +58,17 @@ namespace Models
         [Display(Name = "متریال")]
         public string Material { get; set; }
 
-        [Display(Name= "وزن")]
-        public int? Weight { get; set; }
+        [Display(Name = "وزن(کیلوگرم)")]
+        public decimal? Weight { get; set; }
+        [Display(Name = "موجود؟")]
+        public bool IsAvailable { get; set; }
 
         [Display(Name = "موجودی")]
         public int? Quantity { get; set; }
 
         [Display(Name="سال خلق اثر")]
         public int CreateYear { get; set; }
-
+        [Display(Name = "هنرمند")]
         public Guid? SellerId { get; set; }
         public virtual Seller Seller { get; set; }
 
@@ -82,9 +84,10 @@ namespace Models
         [Display(Name = "سبک")]
         public Guid? ProductMediumId { get; set; }
         public virtual ProductMedium ProductMedium { get; set; }
-        [Display(Name = "رنگ")]
+        [Display(Name = "تم رنگی اثر")]
         public Guid? ProductColorId { get; set; }
         public virtual ProductColor ProductColor { get; set; }
+        [Display(Name = "جهت قرار گیری اثر")]
         public Guid? ProductOrientationId { get; set; }
         public virtual ProductOrientation ProductOrientation { get; set; }
 
@@ -104,7 +107,7 @@ namespace Models
             }
         }
 
-        [Display(Name = "قیمت بعد از تخفیف")]
+        [Display(Name = "قیمت بعد از تخفیف(تومان)")]
         public decimal? DiscountAmount { get; set; }
 
         [Display(Name = "در حراج است؟")]
@@ -128,7 +131,7 @@ namespace Models
 
 
         [NotMapped]
-        [Display(Name = "Amount", ResourceType = typeof(Resources.Models.Order))]
+        [Display(Name = "DiscountAmount", ResourceType = typeof(Resources.Models.Order))]
         public string DiscountAmountStr
         {
             get

@@ -5,173 +5,187 @@
 }
 
 <section class="page_breadcrumbs ls ms section_padding_bottom_15 section_padding_top_75" style="background-image: url('@ViewBag.HeaderImage');">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12 text-center">
-				<div class="heading text-center bottom_border">
-					<p class="text-uppercase josefin grey fontsize_20">نتیجه پرداخت</p>
-					<h1 class="section_header topmargin_5">نتیجه پرداخت</h1>
-				</div>
-				<ol class="breadcrumb">
-					<li>
-						<a href="./">
-							خانه
-						</a>
-					</li>
-					<li>
-						<a href="#">فروشگاه</a>
-					</li>
-					<li class="active"> نتیجه پرداخت</li>
-				</ol>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="heading text-center bottom_border">
+                    <p class="text-uppercase josefin grey fontsize_20">نتیجه پرداخت</p>
+                    <h1 class="section_header topmargin_5">نتیجه پرداخت</h1>
+                </div>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="./">
+                            خانه
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">فروشگاه</a>
+                    </li>
+                    <li class="active"> نتیجه پرداخت</li>
+                </ol>
+            </div>
+        </div>
+    </div>
 </section>
 
 
 <section class="ls section_padding_top_100 section_padding_bottom_75">
-	<div class="container">
-		
-		<div class="row">
-			<div class="col-lg-12">
-				<p class="heading-color mb--30 text-center alert alert-success">
-					پرداخت سفارش شما با موفقیت انجام شد
-				</p>
-			</div>
-			</div>
-			<div class="row">
-			<div class="col-lg-6">
-				@if (Model.IsSuccess)
-				{
+    <div class="container">
 
-					<div class="panel panel-primary">
-						<div class="panel-heading text-right">اطلاعات پرداحت</div>
-						<div class="panel-body text-right">
-							<table class="table table-hover" style="direction: rtl;">
-								<tbody>
+        @*<div class="row">
 
-								<tr>
-									<td>شماره فاکتور: </td>
-									<td>@Model.OrderCode </td>
-								</tr>
-								<tr>
-									<td>شماره پیگیری: </td>
-									<td>@Model.RefrenceId </td>
-								</tr>
+            </div>*@
+        <div class="row">
+
+
+            <div class="col-lg-6">
+                @if (Model.IsSuccess)
+                {
+
+                    <p class="heading-color mb--30 text-center alert alert-success">
+                        پرداخت سفارش شما با موفقیت انجام شد
+                    </p>
 
 
 
-								</tbody>
-							</table>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading text-right">اطلاعات پرداخت</div>
+                            <div class="panel-body text-right">
+                                <table class="table table-hover" style="direction: rtl;">
+                                    <tbody>
 
-							<div class="alert alert-info">
-								<p>
-									با تشکر از خرید شما
-								</p>
-
-							</div>
-						</div>
-					</div>
-
-				}
-				@if (!Model.IsSuccess)
-				{
-					<p class="heading-color mb--30 text-center alert alert-danger">
-						خطا در انجام عملیات پرداخت
-					</p>
-					<div class="panel panel-primary">
-						<div class="panel-heading text-right">اطلاعات پرداحت</div>
-						<div class="panel-body text-right">
-							<table class="table table-hover">
-								<tbody>
-								<tr>
-									<td>کد خطا: </td>
-									<td>@Model.RefrenceId </td>
-								</tr>
-
-
-								</tbody>
-							</table>
-							<p>
-								کاربر گرامی در صورتی که مبلغ سفارش از حساب شما کسر شده است، حداکثر ظرف مدت 72 ساعت به حساب شما باز خواهد گشت. در صورت مشکل با شماره تلفن پشتیبانی تماس بگیرید.
-							</p>
-						</div>
-					</div>
-
-				}
-			</div>
-
-			<div class="col-lg-6">
-
-				@if (Model.IsSuccess)
-				{
-					<section class="ls section_padding_top_100 section_padding_bottom_75">
-
-						<div class="table-responsive">
-							<table class="table cart-table topmargin_0 tbl-basket">
-								<thead>
-								<tr>
-									<td class="product-info">محصول</td>
-									<td class="product-price-td">قیمت</td>
-									<td class="product-quantity">تعداد</td>
-									<td class="product-subtotal">جمع کل</td>
-								</tr>
-								</thead>
-								<tbody>
-								@foreach (var orderDetail in Model.OrderDetails)
-								{
-									<tr class="cart_item">
-										<td class="product-info">
-											<div class="media">
-												<div class="media-right">
-													<a href="product-right.html">
-														<img class="media-object cart-product-image" src="@orderDetail.Product.ImageUrl" alt="@orderDetail.Product.Title">
-													</a>
-												</div>
-												<div class="media-body">
-													<h4 class="media-heading">
-														<a href="product-right.html">@orderDetail.Product.Title</a>
-													</h4>
-
-												</div>
-											</div>
-										</td>
-										<td class="product-price">
-											@if (orderDetail.Product.IsInPromotion == true)
-											{
-												<span class="amount">@orderDetail.Product.DiscountAmountStr</span>
-												<text>تومان</text>
-											}
-											else
-											{
-												<span class="amount">@orderDetail.Product.AmountStr</span>
-												<text>تومان</text>
-											}
-										</td>
-										<td class="product-quantity">
-											<div class="quantity">
-												@orderDetail.Quantity
-											</div>
-										</td>
-										<td class="product-subtotal">
-											<span class="amount">@orderDetail.RawAmount</span>
-										</td>
-									 
-									</tr>
-
-								}
-
-								</tbody>
-							</table>
-						</div>
+                                        <tr>
+                                            <td>شماره فاکتور: </td>
+                                            <td>@Model.OrderCode </td>
+                                        </tr>
+                                        <tr>
+                                            <td>شماره پیگیری: </td>
+                                            <td>@Model.RefrenceId </td>
+                                        </tr>
 
 
 
+                                    </tbody>
+                                </table>
 
-					</section>
-				}
+                                <div class="alert alert-info">
+                                    <p>
+                                        با تشکر از خرید شما
+                                    </p>
 
-			</div>
-		</div>
-	</div>
+                                </div>
+                            </div>
+                        </div>
+
+                }
+                @if (!Model.IsSuccess)
+                {
+                    <p class="heading-color mb--30 text-center alert alert-danger">
+                        خطا در انجام عملیات پرداخت
+                    </p>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading text-right">اطلاعات پرداخت</div>
+                        <div class="panel-body text-right">
+                            <table class="table table-hover" style="direction: rtl;">
+                                <tbody>
+                                    <tr>
+                                        <td>کد خطا: </td>
+                                        <td>@Model.RefrenceId </td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                            <p class="alert alert-warning">
+                                کاربر گرامی در صورتی که مبلغ سفارش از حساب شما کسر شده است، حداکثر ظرف مدت 72 ساعت به حساب شما باز خواهد گشت. در صورت مشکل با شماره تلفن پشتیبانی تماس بگیرید.
+                            </p>
+                        </div>
+                    </div>
+
+                }
+            </div>
+
+            <div class="col-lg-6">
+
+                @*@if (Model.IsSuccess)
+                    {*@
+                <section class="ls section_padding_top_100 section_padding_bottom_75">
+
+                    <div class="table-responsive">
+                        <table class="table cart-table topmargin_0 tbl-basket">
+                            <thead>
+                                <tr>
+                                    <td class="product-info">محصول</td>
+                                    <td class="product-price-td">قیمت</td>
+                                    <td class="product-quantity">تعداد</td>
+                                    <td class="product-subtotal">جمع کل</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var orderDetail in Model.OrderDetails)
+                                {
+                                    <tr class="cart_item">
+                                        <td class="product-info">
+                                            <div class="media">
+                                                <div class="media-right">
+                                                    <a href="product-right.html">
+                                                        <img class="media-object cart-product-image" src="@orderDetail.Product.ImageUrl" alt="@orderDetail.Product.Title">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">
+                                                        <a href="product-right.html">@orderDetail.Product.Title</a>
+                                                    </h4>
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="product-price">
+                                            @if (orderDetail.Product.IsInPromotion == true)
+                                            {
+                                                <span class="amount">@orderDetail.Product.DiscountAmountStr</span>
+                                                <text>تومان</text>
+                                            }
+                                            else
+                                            {
+                                                <span class="amount">@orderDetail.Product.AmountStr</span>
+                                                <text>تومان</text>
+                                            }
+                                        </td>
+                                        <td class="product-quantity">
+                                            <div class="quantity">
+                                                @orderDetail.Quantity
+                                            </div>
+                                        </td>
+                                        <td class="product-subtotal">
+                                            <span class="amount">@string.Format("{0:n0}", orderDetail.RawAmount) تومان</span>
+                                        </td>
+
+                                    </tr>
+
+                                }
+                                <tr>
+                                    <td colspan="4" class="border-left">جمع خرید: @string.Format("{0:n0}", Model.Order.Amount) تومان</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="border-left">تخفیفات: @string.Format("{0:n0}", Model.Order.DiscountAmountStr) تومان</td>
+                                   
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="border-left"><strong>مبلغ پرداختی: @string.Format("{0:n0}", Model.Order.TotalAmountStr) تومان</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+
+                </section>
+                @*}*@
+
+            </div>
+        </div>
+    </div>
 </section>

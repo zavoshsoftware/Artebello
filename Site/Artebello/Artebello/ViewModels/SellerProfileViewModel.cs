@@ -34,6 +34,7 @@ namespace ViewModels
         public string CurrentProvince { get; set; }
 
         [Display(Name = "آدرس پستی")]
+        [DataType(DataType.MultilineText)]
         public string Address { get; set; }
 
         [Display(Name = "ایمیل")]
@@ -64,10 +65,10 @@ namespace ViewModels
         public string MethodOfIntroduction { get; set; }
         public Guid SellerId { get; set; }
 
-        [Display(Name = "نام")]
+        [Display(Name = "نام و نام خانوادگی")]
         public string Title { get; set; }
 
-        [Display(Name = "تصویر")]
+        [Display(Name = "عکس هنرمند")]
         public string ImageUrl { get; set; }
 
         [Display(Name = "رزومه")]

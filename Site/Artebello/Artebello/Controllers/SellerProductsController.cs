@@ -10,6 +10,7 @@ using Models;
 using System.IO;
 using Eshop.Helpers;
 using ViewModels;
+using Helpers;
 
 namespace Artebello.Controllers
 {
@@ -22,7 +23,7 @@ namespace Artebello.Controllers
         public ActionResult Index()
         {
             Guid userId = new Guid(User.Identity.Name);
-            var products = db.Products.Include(p => p.ProductColor).Where(p=>p.IsDeleted==false && p.Seller.UserId == userId).OrderByDescending(p=>p.CreationDate).Include(p => p.ProductGroup).Where(p=>p.IsDeleted==false).OrderByDescending(p=>p.CreationDate).Include(p => p.ProductMedium).Where(p=>p.IsDeleted==false).OrderByDescending(p=>p.CreationDate).Include(p => p.ProductOrientation).Where(p=>p.IsDeleted==false).OrderByDescending(p=>p.CreationDate).Include(p => p.ProductTheme).Where(p=>p.IsDeleted==false).OrderByDescending(p=>p.CreationDate).Include(p => p.ProductType).Where(p=>p.IsDeleted==false).OrderByDescending(p=>p.CreationDate).Include(p => p.Seller).Where(p=>p.IsDeleted==false).OrderByDescending(p=>p.CreationDate);
+            var products = db.Products.Include(p => p.ProductColor).Where(p => p.IsDeleted == false && p.Seller.UserId == userId).OrderByDescending(p => p.CreationDate).Include(p => p.ProductGroup).Where(p => p.IsDeleted == false).OrderByDescending(p => p.CreationDate).Include(p => p.ProductMedium).Where(p => p.IsDeleted == false).OrderByDescending(p => p.CreationDate).Include(p => p.ProductOrientation).Where(p => p.IsDeleted == false).OrderByDescending(p => p.CreationDate).Include(p => p.ProductTheme).Where(p => p.IsDeleted == false).OrderByDescending(p => p.CreationDate).Include(p => p.ProductType).Where(p => p.IsDeleted == false).OrderByDescending(p => p.CreationDate).Include(p => p.Seller).Where(p => p.IsDeleted == false).OrderByDescending(p => p.CreationDate);
             return View(products.ToList());
         }
 
@@ -44,12 +45,12 @@ namespace Artebello.Controllers
         // GET: SellerProducts/Create
         public ActionResult Create()
         {
-            ViewBag.ProductColorId = new SelectList(db.ProductColors, "Id", "Title");
-            ViewBag.ProductGroupId = new SelectList(db.ProductGroups, "Id", "Title");
-            ViewBag.ProductMediumId = new SelectList(db.ProductMediums, "Id", "Title");
-            ViewBag.ProductOrientationId = new SelectList(db.ProductOrientations, "Id", "Title");
-            ViewBag.ProductThemeId = new SelectList(db.ProductThemes, "Id", "Title");
-            ViewBag.ProductTypeId = new SelectList(db.ProductTypes, "Id", "Title");
+            ViewBag.ProductColorId = new SelectList(db.ProductColors.Where(current => current.IsDeleted == false), "Id", "Title");
+            ViewBag.ProductGroupId = new SelectList(db.ProductGroups.Where(current => current.IsDeleted == false), "Id", "Title");
+            ViewBag.ProductMediumId = new SelectList(db.ProductMediums.Where(current => current.IsDeleted == false), "Id", "Title");
+            ViewBag.ProductOrientationId = new SelectList(db.ProductOrientations.Where(current => current.IsDeleted == false), "Id", "Title");
+            ViewBag.ProductThemeId = new SelectList(db.ProductThemes.Where(current => current.IsDeleted == false), "Id", "Title");
+            ViewBag.ProductTypeId = new SelectList(db.ProductTypes.Where(current => current.IsDeleted == false), "Id", "Title");
             //ViewBag.SellerId = new SelectList(db.Sellers, "Id", "Title");
             return View();
         }
@@ -59,7 +60,7 @@ namespace Artebello.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Product product,HttpPostedFileBase fileupload)
+        public ActionResult Create(Product product, HttpPostedFileBase fileupload)
         {
             Guid userId = new Guid(User.Identity.Name);
             Seller seller = db.Sellers.Where(current => current.UserId == userId).FirstOrDefault();
@@ -78,11 +79,11 @@ namespace Artebello.Controllers
                     product.ImageUrl = newFilenameUrl;
                 }
                 #endregion
-                product.Code = CodeCreator.ReturnUserCode();
-                product.IsDeleted=false;
+                product.Code = CodeCreator.ReturnProductCode();
+                product.IsDeleted = false;
                 product.IsActive = false;
                 product.IsInHome = false;
-				product.CreationDate= DateTime.Now; 
+                product.CreationDate = DateTime.Now;
                 product.Id = Guid.NewGuid();
                 product.Seller = seller;
                 db.Products.Add(product);
@@ -90,12 +91,12 @@ namespace Artebello.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProductColorId = new SelectList(db.ProductColors, "Id", "Title", product.ProductColorId);
-            ViewBag.ProductGroupId = new SelectList(db.ProductGroups, "Id", "Title", product.ProductGroupId);
-            ViewBag.ProductMediumId = new SelectList(db.ProductMediums, "Id", "Title", product.ProductMediumId);
-            ViewBag.ProductOrientationId = new SelectList(db.ProductOrientations, "Id", "Title", product.ProductOrientationId);
-            ViewBag.ProductThemeId = new SelectList(db.ProductThemes, "Id", "Title", product.ProductThemeId);
-            ViewBag.ProductTypeId = new SelectList(db.ProductTypes, "Id", "Title", product.ProductTypeId);
+            ViewBag.ProductColorId = new SelectList(db.ProductColors.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductColorId);
+            ViewBag.ProductGroupId = new SelectList(db.ProductGroups.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductGroupId);
+            ViewBag.ProductMediumId = new SelectList(db.ProductMediums.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductMediumId);
+            ViewBag.ProductOrientationId = new SelectList(db.ProductOrientations.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductOrientationId);
+            ViewBag.ProductThemeId = new SelectList(db.ProductThemes.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductThemeId);
+            ViewBag.ProductTypeId = new SelectList(db.ProductTypes.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductTypeId);
             //ViewBag.SellerId = new SelectList(db.Sellers, "Id", "Title", product.SellerId);
             return View(product);
         }
@@ -112,12 +113,12 @@ namespace Artebello.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProductColorId = new SelectList(db.ProductColors, "Id", "Title", product.ProductColorId);
-            ViewBag.ProductGroupId = new SelectList(db.ProductGroups, "Id", "Title", product.ProductGroupId);
-            ViewBag.ProductMediumId = new SelectList(db.ProductMediums, "Id", "Title", product.ProductMediumId);
-            ViewBag.ProductOrientationId = new SelectList(db.ProductOrientations, "Id", "Title", product.ProductOrientationId);
-            ViewBag.ProductThemeId = new SelectList(db.ProductThemes, "Id", "Title", product.ProductThemeId);
-            ViewBag.ProductTypeId = new SelectList(db.ProductTypes, "Id", "Title", product.ProductTypeId);
+            ViewBag.ProductColorId = new SelectList(db.ProductColors.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductColorId);
+            ViewBag.ProductGroupId = new SelectList(db.ProductGroups.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductGroupId);
+            ViewBag.ProductMediumId = new SelectList(db.ProductMediums.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductMediumId);
+            ViewBag.ProductOrientationId = new SelectList(db.ProductOrientations.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductOrientationId);
+            ViewBag.ProductThemeId = new SelectList(db.ProductThemes.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductThemeId);
+            ViewBag.ProductTypeId = new SelectList(db.ProductTypes.Where(current => current.IsDeleted == false), "Id", "Title", product.ProductTypeId);
             //ViewBag.SellerId = new SelectList(db.Sellers, "Id", "Title", product.SellerId);
             return View(product);
         }
@@ -127,7 +128,7 @@ namespace Artebello.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Product product,HttpPostedFileBase fileupload)
+        public ActionResult Edit(Product product, HttpPostedFileBase fileupload)
         {
             if (ModelState.IsValid)
             {
@@ -144,14 +145,16 @@ namespace Artebello.Controllers
                     product.ImageUrl = newFilenameUrl;
                 }
                 #endregion
-                Guid userId = new Guid(User.Identity.Name);
-                Seller seller = db.Sellers.Where(current => current.UserId == userId).FirstOrDefault();
-                product.Seller = seller;
-                product.IsDeleted=false;
+                //Guid userId = new Guid(User.Identity.Name);
+                //Seller seller = db.Sellers.Where(current => current.UserId == userId).FirstOrDefault();
+                //product.Seller = seller;
+                product.IsDeleted = false;
                 product.IsActive = false;
                 product.IsInHome = false;
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
+                string msg = "محصول کد "+ product.Code +" در وب سایت آرتبللو ویرایش شد";
+                SendSms.SendCommonSms("09123964937", msg);
                 return RedirectToAction("Index");
             }
             ViewBag.ProductColorId = new SelectList(db.ProductColors, "Id", "Title", product.ProductColorId);
@@ -185,9 +188,9 @@ namespace Artebello.Controllers
         public ActionResult DeleteConfirmed(Guid id)
         {
             Product product = db.Products.Find(id);
-			product.IsDeleted=true;
-			product.DeletionDate=DateTime.Now;
- 
+            product.IsDeleted = true;
+            product.DeletionDate = DateTime.Now;
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -204,7 +207,7 @@ namespace Artebello.Controllers
         {
             Guid userId = new Guid(User.Identity.Name);
             User user = db.Users.Find(userId);
-            Seller seller = db.Sellers.Where(current =>  !current.IsDeleted && current.UserId == userId).FirstOrDefault();
+            Seller seller = db.Sellers.Where(current => !current.IsDeleted && current.UserId == userId).FirstOrDefault();
 
             List<SelectListItem> Gender = new List<SelectListItem>();
             Gender.Add(new SelectListItem() { Text = "مرد", Value = "false" });
@@ -248,7 +251,7 @@ namespace Artebello.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditProfile(SellerProfileViewModel profile, HttpPostedFileBase fileupload,HttpPostedFileBase resumeupload)
+        public ActionResult EditProfile(SellerProfileViewModel profile, HttpPostedFileBase fileupload, HttpPostedFileBase resumeupload)
         {
             if (ModelState.IsValid)
             {
@@ -276,7 +279,7 @@ namespace Artebello.Controllers
                     fileupload.SaveAs(physicalFilename);
                     seller.ImageUrl = newFilenameUrl;
                 }
-                
+
                 if (resumeupload != null)
                 {
                     if (resumeupload.ContentLength > 4194304)
@@ -304,6 +307,7 @@ namespace Artebello.Controllers
                 seller.ParticipatingForeignExhibitions = profile.ParticipatingForeignExhibitions;
                 seller.MethodOfIntroduction = profile.MethodOfIntroduction;
                 seller.Summery = profile.Summery;
+                seller.IsActive = false;
                 db.Entry(seller).State = EntityState.Modified;
 
                 user.FullName = profile.Fullname;
@@ -320,13 +324,27 @@ namespace Artebello.Controllers
                 user.Address = profile.Address;
                 db.Entry(user).State = EntityState.Modified;
 
-
+                DeActiveSellerProducts(seller.Id);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-           
+
 
             return View(profile);
         }
+
+        public void DeActiveSellerProducts(Guid sellerId)
+        {
+            List<Product> products = db.Products.Where(current => current.IsActive && !current.IsDeleted &&
+            current.SellerId == sellerId).ToList();
+            foreach (Product product in products)
+            {
+                product.IsActive = false;
+                db.Entry(product).State = EntityState.Modified;
+            }
+            
+        }
+
+
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Models.Product>
 
 @{
-    ViewBag.Title = "فهرست محصولات";
+    ViewBag.Title = "فهرست آثار";
 
     Layout = "~/Views/Shared/BackEndLayout/_BackEndLayout.cshtml";
 }
@@ -14,24 +14,25 @@
               {
               columns.Bound(model => model.ProductGroup.Title);
               columns.Bound(model => model.Seller.Title);
-              columns.Bound(model => model.Code);
+              //columns.Bound(model => model.Code);
               columns.Bound(model => model.Title);
-              columns.Bound(model => model.Amount);
+              columns.Bound(model => model.AmountStr);
               columns.Bound(model => model.ImageUrl).Template(@<text><img src="@item.ImageUrl" height="100px" /></text>);
                   columns.Bound(model => model.HeaderUrl).Template(@<text><img src="@item.HeaderUrl" width="100px" /></text>);
 
-            columns.Bound(model => model.CreateYear);
-            columns.Bound(model => model.IsInPromotion);
-            columns.Bound(model => model.IsActive);
-            columns.Bound(model => model.CreationDate);
-            columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false)
-                        .Template(@<text>
+                        columns.Bound(model => model.CreateYear);
+                        columns.Bound(model => model.IsAvailable);
+                        columns.Bound(model => model.IsInPromotion);
+                        columns.Bound(model => model.IsActive);
+                        columns.Bound(model => model.CreationDate);
+                        columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false)
+                              .Template(@<text>
                     @Html.ActionLink("ویرایش", "Edit", new { id = @item.Id }, new { @class = "k-button" })
                     @Html.ActionLink("حذف", "Delete", new { id = @item.Id }, new { @class = "k-button" })
                     @Html.ActionLink("تصاویر", "Index", "ProductImages", new { id = @item.Id }, new { @class = "k-button" })
                     @Html.ActionLink("یادداشت ها", "Index", "ProductComments", new { id = @item.Id }, new { @class = "k-button" })
 
-                        </text>).Width(200);
+                            </text>).Width(200);
               })
         .ToolBar(toolbar =>
         {

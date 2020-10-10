@@ -795,7 +795,14 @@
     <Content Include="Scripts\FrontEnd\vendor\price-slider.min.js" />
     <Content Include="Scripts\FrontEnd\vendor\respond.min.js" />
     <Content Include="Scripts\FrontEnd\vendor\superfish.js" />
+    <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\kendo.modernizr.custom.js" />
     <Content Include="Scripts\kendo\2017.3.913\angular.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\jquery.min.js" />
@@ -838,6 +845,7 @@
     <Content Include="fonts\fontAwesome\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontAwesome\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\kendo\2017.3.913\kendo.all-vsdoc.js" />
     <None Include="Scripts\kendo\2017.3.913\kendo.all.min.intellisense.js" />
     <Content Include="Scripts\kendo\2017.3.913\kendo.all.min.js" />
@@ -979,6 +987,7 @@
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\DiscountCodesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewsLettersController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductColorsController.cs" />
     <Compile Include="Controllers\ProductCommentsController.cs" />
@@ -1004,6 +1013,7 @@
     <Compile Include="Helpers\CodeCreator.cs" />
     <Compile Include="Helpers\DiscountHelper.cs" />
     <Compile Include="Helpers\PersianCulture.cs" />
+    <Compile Include="Helpers\SendSms.cs" />
     <Compile Include="Helpers\ZarinPalHelper.cs" />
     <Compile Include="Migrations\202007131121161_V01.cs" />
     <Compile Include="Migrations\202007131121161_V01.designer.cs">
@@ -1101,6 +1111,14 @@
     <Compile Include="Migrations\202008290821442_V24.designer.cs">
       <DependentUpon>202008290821442_V24.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009070907208_V25.cs" />
+    <Compile Include="Migrations\202009070907208_V25.designer.cs">
+      <DependentUpon>202009070907208_V25.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009300719516_V26.cs" />
+    <Compile Include="Migrations\202009300719516_V26.designer.cs">
+      <DependentUpon>202009300719516_V26.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\DatabaseContextInitializer.cs" />
@@ -1111,6 +1129,7 @@
     <Compile Include="Models\Entities\BlogCategory.cs" />
     <Compile Include="Models\Entities\City.cs" />
     <Compile Include="Models\Entities\DiscountCode.cs" />
+    <Compile Include="Models\Entities\NewsLetter.cs" />
     <Compile Include="Models\Entities\Order.cs" />
     <Compile Include="Models\Entities\OrderDetail.cs" />
     <Compile Include="Models\Entities\OrderDiscount.cs" />
@@ -1138,6 +1157,7 @@
     <Compile Include="ViewModels\BlogListViewModel.cs" />
     <Compile Include="ViewModels\CallBackViewModel.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
+    <Compile Include="ViewModels\CityItemViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -1508,6 +1528,11 @@
     <Content Include="Views\Orders\UserDetails.cshtml" />
     <Content Include="Views\SellerProducts\EditProfile.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\NewsLetters\Create.cshtml" />
+    <Content Include="Views\NewsLetters\Delete.cshtml" />
+    <Content Include="Views\NewsLetters\Details.cshtml" />
+    <Content Include="Views\NewsLetters\Edit.cshtml" />
+    <Content Include="Views\NewsLetters\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1602,6 +1627,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008290821442_V24.resx">
       <DependentUpon>202008290821442_V24.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009070907208_V25.resx">
+      <DependentUpon>202009070907208_V25.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009300719516_V26.resx">
+      <DependentUpon>202009300719516_V26.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

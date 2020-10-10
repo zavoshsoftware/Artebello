@@ -31,7 +31,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Amount, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                                      @Html.EditorFor(model => model.Amount)
+                                      @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @onkeyup = "format(this)" } })
                     @Html.ValidationMessageFor(model => model.Amount)
                 </div>
             </div>
@@ -39,7 +39,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Body, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                                      @Html.EditorFor(model => model.Body)
+                                      @Html.TextAreaFor(model => model.Body,new { @class= "multi-line" })
                     @Html.ValidationMessageFor(model => model.Body)
                 </div>
             </div>
@@ -80,13 +80,13 @@
                 </div>
             </div>
     
-            <div class="form-group">
+            @*<div class="form-group">
                 @Html.LabelFor(model => model.Quantity, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                                       @Html.EditorFor(model => model.Quantity)
                     @Html.ValidationMessageFor(model => model.Quantity)
                 </div>
-            </div>
+            </div>*@
     
             <div class="form-group">
                 @Html.LabelFor(model => model.CreateYear, new { @class = "control-label col-md-2" })
@@ -152,14 +152,20 @@
                 </div>
             </div>
     
-            <div class="form-group">
+            @*<div class="form-group">
                 @Html.LabelFor(model => model.DiscountAmount, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                                       @Html.EditorFor(model => model.DiscountAmount)
                     @Html.ValidationMessageFor(model => model.DiscountAmount)
                 </div>
+            </div>*@
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsAvailable, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.IsAvailable)
+                    @Html.ValidationMessageFor(model => model.IsAvailable)
+                </div>
             </div>
-    
             <div class="form-group">
                 @Html.LabelFor(model => model.IsInPromotion, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -203,7 +209,7 @@
     
             <div class="form-group" id="buttons">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="ثبت" class="btn btn-primary" />
+                    <input type="submit" value="ثبت" class="btn btn-primary"  onclick="ChangeDecimal();"/>
     				@Html.ActionLink("بازگشت به فهرست", "Index")
                 </div>
             </div>

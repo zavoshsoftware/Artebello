@@ -13,6 +13,7 @@ namespace ViewModels
         public string Total { get; set; }
         public string DiscountAmount { get; set; }
         public List<Province> Provinces { get; set; }
+        public Guid ProvinceId { get; set; }
 
     }
 

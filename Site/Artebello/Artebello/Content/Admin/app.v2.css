@@ -12825,3 +12825,10 @@ a:hover .caret-white {
         display: inherit !important;
     }
 }
+#Summery, .multi-line {
+    width: 500px;
+    height: 200px;
+}
+.fontsize-15 {
+    font-size: 15px;
+}

@@ -74,9 +74,9 @@
 					<p>با ثبت ایمیل خود در خبر نامه عضو شوید.</p>
 					<form class="signup form-inline" action="/" method="get">
 						<div class="form-group">
-							<input name="email" type="email" class="mailchimp_email form-control" placeholder="ایمیل خود را ثبت کنید">
+							<input name="email" type="email" id="txtEmail" class="mailchimp_email form-control" placeholder="ایمیل خود را ثبت کنید">
 						</div>
-						<button type="submit" class="theme_button">ارسال</button>
+						<button type="button" class="theme_button" onclick="JoinNewsLetter();">ارسال</button>
 						<div class="response"></div>
 					</form>
 					<div class="lightgreylinks page_social topmargin_20">
@@ -102,7 +102,7 @@
 							<a href="/">خانه</a>
 						</li>
 						<li>
-							<a href="#">محصولات</a>
+							<a href="#">آثار</a>
 						</li>
 						<li>
 							<a href="/artists">هنرمندان</a>

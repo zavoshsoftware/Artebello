@@ -7,6 +7,10 @@ body, p, a, h1, h2, h3, h4, h5, h6, ul, li, input, button, table, th, td, .bread
     font-family: IRANSans;
 }
 
+.teaser .media-body h4 {
+    line-height: 1.2;
+}
+
 .logo-img img {
     max-width: 80%;
 }
@@ -110,6 +114,7 @@ body, p, a, h1, h2, h3, h4, h5, h6, ul, li, input, button, table, th, td, .bread
 
 .ls input[type="text"], .ls input[type="email"], .ls input[type="url"], .ls input[type="password"], .ls input[type="search"], .ls input[type="tel"], .ls textarea, .ls select, .ls .form-control {
     text-align: right;
+    font-family: Iransans;
 }
 
 .media-body {
@@ -262,7 +267,7 @@ h3.entry-title, .blog-header {
         }
 
     .mainmenu_wrapper .mega-menu-image {
-       cursor:pointer;
+        cursor: pointer;
     }
 
         .mainmenu_wrapper .mega-menu-image:before {
@@ -280,4 +285,8 @@ h3.entry-title, .blog-header {
         .mainmenu_wrapper .mega-menu-image a {
             color: #fff;
         }
+}
+.pp_details .pp_social
+{
+    display:none;
 }

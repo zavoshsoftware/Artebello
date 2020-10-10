@@ -7,8 +7,17 @@ function addToBasket(code, qty) {
             data: { code: code, qty: qty },
             type: "Post"
         }).done(function (result) {
-       
-            window.location = "/basket";
+            //window.location = "/basket";
+            if (result === "true")
+            {
+                window.location = "/basket";
+            }
+            else
+            {
+                alert('موجودی محصول کافی نیست');
+            }
+
+            
         });
 }
 
@@ -61,7 +70,11 @@ function FinalizeOrder() {
     var activationCode = $('#txtActivationCode').val();
     var cellNumber = $('#txtCellNum').val();
     var email = $('#email').val();
-    var city = $('#city').val();
+
+    var e = document.getElementById("ddlCity");
+    var city = e.options[e.selectedIndex].value;
+
+    //var city = $('#city').val();
     var address = $('#address').val();
     var postal = $('#postal').val();
 
@@ -287,5 +300,60 @@ function checkUserOtp() {
         $('#error-box-otp').css('display', 'block');
         $('#error-box-otp').html('کد فعال سازی را وارد کنید');
         AppearButton('btn-checkOtp', 'activation-loading-box');
+    }
+}
+
+function FillCities()
+{
+    var e = document.getElementById("ddlProvince");
+    var SelectedValue = e.options[e.selectedIndex].value;
+     //var SelectedValue = $(this).val();
+     if (SelectedValue !== "") {
+         var procemessage = "<option value='0'> صبرکنید...</option>";
+         $("#ddlCity").html(procemessage).show();
+         $.ajax(
+             {
+                 url: "/Shop/FillCities",
+                 data: { id: SelectedValue },
+                 cache: false,
+                 type: "POST",
+                 success: function (data) {
+                     var markup = "<option value='0'>انتخاب شهر</option>";
+                     for (var x = 0; x < data.length; x++) {
+                         markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                     }
+                     $("#ddlCity").html(markup).show();
+                 },
+                 error: function (reponse) {
+                     alert("error : " + reponse);
+                 }
+             });
+     }
+       
+}
+
+function JoinNewsLetter() {
+    var emailVal = $("#txtEmail").val();
+    if (emailVal != "") {
+        $.ajax(
+            {
+                url: "/home/JoinNewsLetter",
+                data: { email: emailVal },
+                type: "GET"
+            }).done(function (result) {
+                if (result == "true") {
+                    document.getElementById('txtEmail').value = "";
+                    alert('عضویت شما در خبرنامه با موفقیت صورت پذیرفت');
+                }
+                else if (result == "false") {
+                    alert('خطایی رخ داد! مجددا تلاش نمایید');
+                }
+                else if (result == "InvalidEmail") {
+                    alert('ایمیل وارد شده صحیح نمی باشد! مجددا تلاش نمایید');
+                }
+            });
+    }
+    else {
+        alert('جهت عضویت در خبرنامه ایمیل خود را وارد نمایید');
     }
 }
