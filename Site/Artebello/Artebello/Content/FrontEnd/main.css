@@ -6078,6 +6078,7 @@ body.modal-open {
 @media screen and (min-width: 1200px) {
 	.mainmenu_wrapper .mega-menu {
 		width: 1140px;
+	  
 	}
 
 	.mainmenu_wrapper ul .mega-menu ul {
